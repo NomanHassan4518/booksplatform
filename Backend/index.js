@@ -13,7 +13,7 @@ app.get("/",(req,resp)=>{
 })
 
 app.post("/register", async (req,resp)=>{
-    let user = User(req.body);
+    let user = await User(req.body);
     let result = await user.save();
     result = result.toObject();
     delete result.password
