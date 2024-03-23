@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaFacebook ,FaMobileAlt,FaQuestion  } from "react-icons/fa";
-import { MdRoundaboutRight,MdAddLocationAlt,MdMarkEmailUnread ,MdOutlinePrivacyTip    } from "react-icons/md";
+import { MdRoundaboutRight,MdMarkEmailUnread ,MdOutlinePrivacyTip    } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { LuFileTerminal } from "react-icons/lu";
 import { GiReturnArrow } from "react-icons/gi";
