@@ -67,7 +67,7 @@ const Order = () => {
       </div>
       <div className="mt-8 mb-6 w-full flex ">
         <div className='w-full'>
-          <input type="text" placeholder='Discount Code' value={discount} className='rounded-md h-12  w-full focus:border-none focus:ring-black ' onChange={discountChange} />
+          <input type="text" placeholder='Discount Code' value={discount} className='rounded-md h-12  w-full px-6 border-2 border-black focus:ring-0 focus:outline-none ' onChange={discountChange} />
         </div>
 
         <div>

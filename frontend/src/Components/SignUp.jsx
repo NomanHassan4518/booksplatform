@@ -26,7 +26,7 @@ const SignUp = ({onClose}) => {
     }
     return (
         <div>
-            {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold absolute top-5 rounded-full p-1 right-5 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
+            {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold fixed top-5 rounded-full p-1 right-5 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
 
             <Modal
                 isOpen={modalIsOpen}

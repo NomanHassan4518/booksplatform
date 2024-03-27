@@ -50,10 +50,10 @@ const Navbar = () => {
             <div className='sticky top-0 w-full  px-16 border-b-4 border-red-500 bg-white z-[100] '>
                 <div className='flex justify-between items-center'>
                     <div className="flex justify-between items-center space-x-20">
-                        <div className='text-center  flex items-center space-x-2 py-4'>
+                        <Link to="/" className='text-center  flex items-center space-x-2 py-4'>
                             <img className='w-[45px] object-cover' src="https://thebooksplatforms.com/wp-content/uploads/2023/09/cropped-888990-100x120.png" alt="" />
                             <h1 className='font-bold text-xl'>The Books <br /> Platform</h1>
-                        </div>
+                        </Link>
 
                         <div className='lg:block hidden'>
                             <ul className='flex items-center space-x-10 text-xl '>
@@ -197,14 +197,14 @@ const Navbar = () => {
 
 
                         <div class="flex flex-col px-5 md:px-7 pt-2 pb-5 md:pb-7">
-                            <Link to="/checkout" >
-                                <p className={`w-full px-5 py-3 md:py-4 flex items-center justify-center  rounded-md text-sm sm:text-base text-white focus:outline-none transition duration-300 bg-black hover:bg-gray-600 ${cartData.length === 0 ? "cursor-not-allowed" : "cursor-pointer"}`} >
+                            <button disabled={cartData.length===0} onClick={toggleDrawer}>
+                                <p className={`w-full px-5 py-3 md:py-4 flex items-center justify-center  rounded-md text-sm sm:text-base text-white focus:outline-none transition duration-300 bg-black hover:bg-gray-600 ${cartData.length === 0 ? "cursor-not-allowed " : "cursor-pointer"}`} >
                                     <span class="w-full pe-5 -mt-0.5 py-0.5">Proceed To Checkout</span>
                                     <span className="ms-auto flex-shrink-0 -mt-0.5 py-0.5">
                                         <span className="border-s border-white pe-5 py-0.5">
                                         </span>{cartData.length === 0 ? "RS 0.00" : `RS ${price.toFixed(2)}`}</span>
                                 </p>
-                            </Link>
+                            </button>
                         </div>
 
                     </div>
