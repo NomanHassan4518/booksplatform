@@ -2,8 +2,15 @@ const express = require("express");
 const app = express();
 let cors = require("cors");
 
+
 app.use(express.json());
-app.use(cors());
+const corsConfig={
+    origin:"*",
+    credential:true,
+    methods:["GET","POST"]
+}
+app.options("",cors(corsConfig))
+app.use(cors(corsConfig));
 
 require("./collections/config");
 let User = require("./collections/user");
