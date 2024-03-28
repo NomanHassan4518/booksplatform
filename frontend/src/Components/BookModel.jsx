@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux';
 const BookModel = ({ book, onClose }) => {
     let [quantity, setQuantity] = useState(1)
     let dispatch = useDispatch();
-    const modalIsOpen = true
+    let [modalIsOpen,isOpen] = useState(true)
     let bookData = book;
+    console.log(onClose);
 
     const handleCart = () => {
         let cartData = {
@@ -16,6 +17,7 @@ const BookModel = ({ book, onClose }) => {
             quantity: quantity
         }
         dispatch(addToCart(cartData))
+        isOpen(onClose)
     }
     const customStyles = {
         content: {

@@ -66,7 +66,7 @@ const AllBooks = () => {
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
             {
                 selling.map((book, index) => (
-                    <div to="/" key={index} className='flex items-center space-x-5 bg-[#f9f9f9] shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
+                    <div  key={index} className='flex items-center space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
                         <div className='w-[250px] h-[183px]'>
                             <img className='w-full h-full object-cover group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
                         </div>
