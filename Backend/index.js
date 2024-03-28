@@ -15,9 +15,14 @@ app.get("/", (req, res) => {
 app.post("/signup", async (req, res) => {
   let user = User(req.body);
   let result = await user.save();
-  result=result.toObject();
-  delete result.password
+  result = result.toObject();
+  delete result.password;
   res.send(result);
 });
 
-app.listen(5000);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+module.exports = app;
