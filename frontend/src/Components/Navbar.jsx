@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SignUp from './SignUp'
 import Login from './Login'
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineClose } from 'react-icons/ai'
 import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeToCart, increseToQuantity,decreaseToQuantity } from './Redux/Action/Action';
+import { removeToCart, increseToQuantity, decreaseToQuantity } from './Redux/Action/Action';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [openSignup, setopenSignUp] = useState(false)
     const [openLogin, setOpenLogin] = useState(false)
     let dispatch = useDispatch();
+    let navigate = useNavigate();
     let title = "Shopping cart"
     let cartData = useSelector((state) => state.cardData)
     let price = useSelector((state) => state.totalPrice)
     let totalItems = useSelector((state) => state.totalItems)
+    let auth = localStorage.getItem("user")
+    console.log(auth);
 
     const remove = (index) => {
         dispatch(removeToCart(index))
@@ -38,8 +41,22 @@ const Navbar = () => {
         setOpenLogin(true)
     }
 
+    const handleCheckOut = () => {
+        if (auth) {
+            navigate("/checkout")
+            setIsOpen(false)
+        } else {
+            setopenSignUp(true)
+        }
+    }
+
     const handleDrawerOpen = () => {
         setIsOpen(true)
+    }
+
+    const handleLogOut = () => {
+        localStorage.clear();
+        navigate("/")
     }
 
     const toggleDrawer = () => {
@@ -47,16 +64,16 @@ const Navbar = () => {
     }
     return (
         <>
-            <div className='sticky top-0 w-full  px-16 border-b-4 border-red-500 bg-white z-[100] '>
+            <div className='md:sticky top-0 w-full  md:px-16 px-4 border-b-4 border-red-500 bg-white z-[100] '>
                 <div className='flex justify-between items-center'>
                     <div className="flex justify-between items-center space-x-20">
                         <Link to="/" className='text-center  flex items-center space-x-2 py-4'>
                             <img className='w-[45px] object-cover' src="https://thebooksplatforms.com/wp-content/uploads/2023/09/cropped-888990-100x120.png" alt="" />
-                            <h1 className='font-bold text-xl'>The Books <br /> Platform</h1>
+                            <h1 className='font-bold text-xl  md:w-[7rem] '>The Books Platform</h1>
                         </Link>
 
-                        <div className='lg:block hidden'>
-                            <ul className='flex items-center space-x-10 text-xl '>
+                        <div >
+                            <ul className='lg:flex hidden items-center space-x-10 text-xl '>
                                 <li className='relative '><Link to="/" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full '>Home</Link></li>
                                 <li className='relative group py-5'><p className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[3.5rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 group-hover:after:w-full cursor-default '>
                                     <div className="flex items-center">
@@ -117,20 +134,44 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    <div className='space-x-8 font-semibold text-xl flex items-center'>
-                        <button onClick={handleLoginbutton}>
-                            Login
-                        </button>
-                        <button onClick={handleSignUpButton}>
-                            SignUp
-                        </button>
+                    <div className='space-x-8 font-semibold text-xl  md:flex hidden items-center'>
+                        {
+                            auth ? <button onClick={handleLogOut}>Logout</button> : <div className="space-x-8 font-semibold text-xl flex items-center">
+                                <button onClick={handleLoginbutton}>
+                                    Login
+                                </button>
+                                <button onClick={handleSignUpButton}>
+                                    SignUp
+                                </button>
+                            </div>
+                        }
                         <div>
                             <button className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform" aria-label="cart-button" onClick={handleDrawerOpen}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 20 20" className="md:w-4 xl:w-5 md:h-4 xl:h-5"><path d="M5,4H19a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4ZM2,5A3,3,0,0,1,5,2H19a3,3,0,0,1,3,3V19a3,3,0,0,1-3,3H5a3,3,0,0,1-3-3Zm10,7C9.239,12,7,9.314,7,6H9c0,2.566,1.669,4,3,4s3-1.434,3-4h2C17,9.314,14.761,12,12,12Z" transform="translate(-2 -2)" fill="currentColor" fillRule="evenodd"></path></svg>
                                 <span className="cart-counter-badge flex items-center justify-center bg-black text-white absolute -top-[15px] -right-[12px] px-2 text-xs py-1 rounded-full font-bold" >{totalItems}</span>
                             </button>
                         </div>
+
+                        <button className='lg:hidden md:block hidden !pl-6'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" viewBox="0 0 25.567 18"><g transform="translate(-776 -462)"><rect id="Rectangle_941" data-name="Rectangle 941" width="12.749" height="2.499" rx="1.25" transform="translate(776 462)" fill="currentColor"></rect><rect id="Rectangle_942" data-name="Rectangle 942" width="25.567" height="2.499" rx="1.25" transform="translate(776 469.75)" fill="currentColor"></rect><rect id="Rectangle_943" data-name="Rectangle 943" width="17.972" height="2.499" rx="1.25" transform="translate(776 477.501)" fill="currentColor"></rect></g></svg>
+                        </button>
                     </div>
+                </div>
+            </div>
+
+            <div className='md:hidden flex items-center justify-between px-8 pb-3 pt-5 w-full  bg-white border-t-4 border-green-700 fixed bottom-0 '>
+                <button >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" viewBox="0 0 25.567 18"><g transform="translate(-776 -462)"><rect id="Rectangle_941" data-name="Rectangle 941" width="12.749" height="2.499" rx="1.25" transform="translate(776 462)" fill="currentColor"></rect><rect id="Rectangle_942" data-name="Rectangle 942" width="25.567" height="2.499" rx="1.25" transform="translate(776 469.75)" fill="currentColor"></rect><rect id="Rectangle_943" data-name="Rectangle 943" width="17.972" height="2.499" rx="1.25" transform="translate(776 477.501)" fill="currentColor"></rect></g></svg>
+                </button>
+                <Link to='/'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="20px" viewBox="0 0 17.996 20.442"><path d="M48.187,7.823,39.851.182A.7.7,0,0,0,38.9.2L31.03,7.841a.7.7,0,0,0-.211.5V19.311a.694.694,0,0,0,.694.694H37.3A.694.694,0,0,0,38,19.311V14.217h3.242v5.095a.694.694,0,0,0,.694.694h5.789a.694.694,0,0,0,.694-.694V8.335a.7.7,0,0,0-.228-.512ZM47.023,18.617h-4.4V13.522a.694.694,0,0,0-.694-.694H37.3a.694.694,0,0,0-.694.694v5.095H32.2V8.63l7.192-6.98L47.02,8.642v9.975Z" transform="translate(-30.619 0.236)" fill="currentColor" stroke="currentColor" strokeWidth="0.4"></path></svg>
+                </Link>
+                <button className="flex items-center justify-center  flex-shrink-0 h-auto relative focus:outline-none transform" aria-label="cart-button" onClick={handleDrawerOpen}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 20 20" className="md:w-4 xl:w-5 md:h-4 xl:h-5"><path d="M5,4H19a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4ZM2,5A3,3,0,0,1,5,2H19a3,3,0,0,1,3,3V19a3,3,0,0,1-3,3H5a3,3,0,0,1-3-3Zm10,7C9.239,12,7,9.314,7,6H9c0,2.566,1.669,4,3,4s3-1.434,3-4h2C17,9.314,14.761,12,12,12Z" transform="translate(-2 -2)" fill="currentColor" fillRule="evenodd"></path></svg>
+                    <span className="cart-counter-badge flex items-center justify-center bg-black text-white absolute -top-[15px] -right-[12px] px-2 text-xs py-1 rounded-full font-bold" >{totalItems}</span>
+                </button>
+                <div onClick={() => { setopenSignUp(true) }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="20px" viewBox="0 0 16.577 18.6"><path d="M-7722.37,2933a.63.63,0,0,1-.63-.63c0-4.424,2.837-6.862,7.989-6.862s7.989,2.438,7.989,6.862a.629.629,0,0,1-.63.63Zm.647-1.251h13.428c-.246-3.31-2.5-4.986-6.713-4.986s-6.471,1.673-6.714,4.986Zm2.564-12.518a4.1,4.1,0,0,1,1.172-3,4.1,4.1,0,0,1,2.979-1.229,4.1,4.1,0,0,1,2.979,1.229,4.1,4.1,0,0,1,1.171,3,4.341,4.341,0,0,1-4.149,4.5,4.344,4.344,0,0,1-4.16-4.5Zm1.251,0a3.1,3.1,0,0,0,2.9,3.254,3.094,3.094,0,0,0,2.9-3.253,2.878,2.878,0,0,0-.813-2.109,2.88,2.88,0,0,0-2.085-.872,2.843,2.843,0,0,0-2.1.856,2.841,2.841,0,0,0-.806,2.122Z" transform="translate(7723.3 -2914.703)" fill="currentColor" stroke="currentColor" stroke-width="0.6"></path></svg>
                 </div>
             </div>
 
@@ -140,7 +181,6 @@ const Navbar = () => {
             {
                 openLogin && <Login onClose={() => { setOpenLogin(false) }} />
             }
-
             <Drawer
                 title={title}
                 open={isOpen}
@@ -174,10 +214,10 @@ const Navbar = () => {
 
                                         <div className="flex justify-between w-full items-center mt-5">
                                             <div className="flex bg-black text-white font-bold text-lg  h-10 rounded-md">
-                                                <button className='flex justify-center items-center w-8 lg:w-10 border-e border-gray-400 cursor-pointer' onClick={() => { decreseQuantity(index)}}>-</button>
+                                                <button className='flex justify-center items-center w-8 lg:w-10 border-e border-gray-400 cursor-pointer' onClick={() => { decreseQuantity(index) }}>-</button>
 
                                                 <button className='w-11'> {item.quantity}</button>
-                                                
+
                                                 <button className='flex justify-center items-center w-8 lg:w-10 border-s border-gray-400 cursor-pointer' onClick={() => { increaseQuantity(index) }}>+</button>
                                             </div>
 
@@ -197,7 +237,7 @@ const Navbar = () => {
 
 
                         <div class="flex flex-col px-5 md:px-7 pt-2 pb-5 md:pb-7">
-                            <button disabled={cartData.length===0} onClick={toggleDrawer}>
+                            <button disabled={cartData.length === 0} onClick={handleCheckOut}>
                                 <p className={`w-full px-5 py-3 md:py-4 flex items-center justify-center  rounded-md text-sm sm:text-base text-white focus:outline-none transition duration-300 bg-black hover:bg-gray-600 ${cartData.length === 0 ? "cursor-not-allowed " : "cursor-pointer"}`} >
                                     <span class="w-full pe-5 -mt-0.5 py-0.5">Proceed To Checkout</span>
                                     <span className="ms-auto flex-shrink-0 -mt-0.5 py-0.5">

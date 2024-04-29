@@ -5,12 +5,9 @@ import { useSelector } from 'react-redux'
 const Order = () => {
   let productData = useSelector((state) => state.cardData)
   let totalPrice = useSelector((state) => state.totalPrice)
-  const [discount, setDiscount] = useState("")
   const [check, setCheck] = useState("cash")
 
-  const discountChange = ((e) => {
-    setDiscount(e.target.value)
-  })
+
 
   let paymentMethod = [
     {
@@ -65,15 +62,7 @@ const Order = () => {
           ))
         }
       </div>
-      <div className="mt-8 mb-6 w-full flex ">
-        <div className='w-full'>
-          <input type="text" placeholder='Discount Code' value={discount} className='rounded-md h-12  w-full px-6 border-2 border-black focus:ring-0 focus:outline-none ' onChange={discountChange} />
-        </div>
-
-        <div>
-          <button className={`  bg-green-700 text-white text-lg font-semibold w-20 h-12 rounded-md mx-6 ${discount.length === 0 ? "cursor-not-allowed" : "cursor-pointer"} `} >Apply</button>
-        </div>
-      </div>
+    
 
       <div className='mt-6 '>
 

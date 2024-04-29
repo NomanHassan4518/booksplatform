@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal';
 import { IoCloseSharp } from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const SignUp = ({onClose}) => {
-    const modalIsOpen = true
+const SignUp = ({ onClose }) => {
+    let [modalIsOpen, setIsOpen] = useState(true)
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,7 +23,31 @@ const SignUp = ({onClose}) => {
         },
     };
 
-    const handleSignup = () => {
+    const handleSignup = async (e) => {
+        e.preventDefault()
+        let result = await fetch("http://localhost:5000/signup", {
+            method: "POST",
+            body: JSON.stringify({ name, email, password }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        result = await result.json();
+        if (result) {
+            toast.success("Signup Successfully!", {
+              autoClose: 2000
+            });
+            localStorage.setItem("user", JSON.stringify({name,email}))
+      
+            setTimeout(() => {
+             setIsOpen(onClose)
+            }, [2000])
+          }
+      
+          else {
+            toast.error("Please try again");
+          }
 
     }
     return (
@@ -51,6 +77,7 @@ const SignUp = ({onClose}) => {
                     </form>
                 </div>
             </Modal>
+            <ToastContainer position='top-center' />
         </div>
     )
 }

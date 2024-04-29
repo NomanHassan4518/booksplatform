@@ -7,7 +7,7 @@ import { GiReturnArrow } from "react-icons/gi";
 
 const Footer = () => {
     return (
-        <div className=' px-12 pt-10 pb-5 mb-2 border-t-2 border-black mt-6 grid lg:grid-cols-4 lg:gap-4 gap-8 font-serif grid-cols-1 md:grid-cols-2'>
+        <div className=' md:px-12 px-4 pt-10 pb-5 mb-2 border-t-2 border-black mt-6 grid lg:grid-cols-4 lg:gap-4 gap-8 font-serif grid-cols-1 md:grid-cols-2'>
            
             <div >
                 <h1 className='text-2xl font-bold mb-7'>Social</h1>
@@ -34,7 +34,7 @@ const Footer = () => {
                 </h1>
                 <h1 className='flex items-center mt-6 space-x-4 text-xl'>
                     <span className='text-3xl text-red-600'><MdMarkEmailUnread   /></span>
-                    <Link to="/about">thebooksplatform@gmail.com</Link>
+                    <Link to="/about">thebooks@gmail.com</Link>
                 </h1>
                 
             </div>
@@ -55,8 +55,8 @@ const Footer = () => {
                     <span className='text-3xl text-orange-600'><GiReturnArrow    /></span>
                     <Link to="/about">Returns & Refunds Policy</Link>
                 </h1>
-                <h1 className='flex items-center mt-6 space-x-4 text-xl'>
-                    <span className='text-3xl text-red-600'><FaQuestion     /></span>
+                <h1 className='flex items-center mt-6 space-x-4 text-xl pb-10 md:pb-0 '>
+                    <span className='text-3xl text-red-600  '><FaQuestion     /></span>
                     <Link to="/about">FAQ & Help</Link>
                 </h1>
             </div>

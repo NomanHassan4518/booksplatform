@@ -9,7 +9,7 @@ export const addToCart = (drawerData) => {
 
 export const removeToCart = (index) => {
     return {
-        type: removeCart,
+        type: removeCart, 
         payload: index
     }
 }

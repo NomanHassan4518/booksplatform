@@ -8,9 +8,40 @@ const Home = () => {
     const [modelOpen, setIsOpen] = useState(false);
     const [modelData, setModelData] = useState(null)
 
+    async function fetchData() {
+        try {
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1laGJvb2JAdGVzdC5jb20iLCJpZCI6IjY2MDViODBmYzkxMDBjNTc3Yjk0NzE0ZiIsImlhdCI6MTcxMTY1MDgzMX0.cBTQ2u9sR-t9lrFn329BGP_7yZIvReUvh8X_TD7e4cg'; // Replace 'YOUR_JWT_TOKEN' with your actual JWT token
+            
+            const response = await fetch('https://db-rns85fpkq-nomanhassan4518.vercel.app/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    // Optionally, you can include data to send to the server in the body
+                    // For example:
+                    name: 'exampleUser',
+                    email:"df",
+                    password: 'examplePassword'
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+
+            const data = await response.json();
+            console.log('Data:', data);
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    }
+
     const handleBook = (book) => {
         setIsOpen(true)
         setModelData(book)
+        fetchData();
     }
 
     const selling = [
@@ -60,28 +91,28 @@ const Home = () => {
 
 
     return (
-        <div className='w-full  '>
+        <div className='w-full border '>
             <div className="px-4">
                 <HomeTopSlider />
             </div>
 
-            <div className='px-4 mt-12  pb-12'>
-                <div className='border p-5 rounded shadow '>
+            <div className='md:px-4 px-2 md:mt-12 mt-5 pb-12'>
+                <div className='border md:p-5 py-5 px-3 rounded shadow '>
                     <div className="flex items-center justify-between">
-                        <h1 className='text-2xl font-bold'>Most Selling</h1>
-                        <Link to="/allbooks" className='text-lg hover:text-blue-600'>See all books</Link>
+                        <h1 className='md:text-2xl text-xl font-bold'>Most Selling</h1>
+                        <Link to="/allbooks" className='md:text-lg hover:text-blue-600'>See all books</Link>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
+                    <div className="grid 2xl:grid-cols-4  lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
                         {
                             selling.map((book, index) => (
-                                <div  key={book.id} className='flex items-center space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
-                                    <div className='w-[250px] h-[183px]'>
-                                        <img className='w-full h-full object-cover group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
+                                <div  key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
+                                    <div className='md:w-[250px] md:h-[183px] w-[100%] h-[250px] '>
+                                        <img className='w-full h-full md:object-cover object-fill group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
                                     </div>
                                     <div>
-                                        <p className='text-xl font-semibold mb-3 uppercase'>{book.name}</p>
-                                        <p className='text-gray-500'>{book.desc}</p>
+                                        <p className='md:text-xl font-semibold mt-3 md:mt-0 mb-3 uppercase'>{book.name}</p>
+                                        <p className='text-gray-500  '>{book.desc}</p>
                                         <p className="mt-3 text-lg font-semibold">RS {book.price}</p>
                                     </div>
                                 </div>
@@ -91,16 +122,16 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className='-mt-1 relative' style={{ backgroundImage: `url("https://thebooksplatforms.com/wp-content/uploads/2023/08/wp9166934-4k-books-wallpapers-scaled.jpg")`, height: "25rem", width: "100%", backgroundAttachment: "fixed", backgroundPosition: "center", backgroundSize: "cover" }}>
-                <div className='px-12 text-white  absolute flex font-serif items-center w-full h-full'>
+            <div className='-mt-1 relative h-[25rem] ' style={{ backgroundImage: `url("https://thebooksplatforms.com/wp-content/uploads/2023/08/wp9166934-4k-books-wallpapers-scaled.jpg")`,  width: "100%", backgroundAttachment: "fixed", backgroundPosition: "center", backgroundSize: "cover" }}>
+                <div className='md:px-12 px-4 text-white  absolute flex font-serif items-center w-full h-full'>
                     <div className='z-50'>
-                        <p className='text-3xl font-bold'>
+                        <p className='md:text-3xl text-2xl font-bold'>
                             Limited Time Summer offers</p>
-                        <h1 className="mt-6 text-5xl font-bold leading-[55px]">
+                        <h1 className="md:mt-6 mt-3 md:text-5xl text-3xl font-bold md:leading-[55px]">
                             Special Edition Books <br />
                             at discounted prices
                         </h1>
-                        <div className="mt-16">
+                        <div className=" md:mt-16 mt-8">
 
                             <Link className='py-4 px-6 text-black bg-white !mt-5 hover:bg-black hover:text-white font-semibold' to="/allbooks">Shop Now</Link>
                         </div>
@@ -111,7 +142,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className=' px-5 py-12 grid lg:grid-cols-4 grid-cols-2 lg:space-y-0 space-y-6 gap-5   border-t-2 mt-12 border-black'>
+            <div className='md:px-5 px-3 py-12 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:space-y-0  gap-10   border-t-2 mt-12 border-black'>
                 <div className='  flex items-center justify-center flex-col'>
                     <img className='w-[60px] pb-3' src="https://thebooksplatforms.com/wp-content/uploads/2018/12/globe-free-img.png" alt="" />
                     <p className='text-xl font-semibold'>Shipping arround Pakistan</p>

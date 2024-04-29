@@ -47,7 +47,7 @@ const HomeTopSlider = () => {
     },
   ]
   return (
-    <div className='my-12'>
+    <div className='md:my-12 my-8 '>
       <Carousel responsive={responsive}
         infinite
         autoPlay
@@ -56,7 +56,7 @@ const HomeTopSlider = () => {
       >
         {
           slider.map((item, index) => (
-            <Link to="/" key={index} className='bg-gray-100 hover:bg-gray-200  mx-4 ml-6 px-5 py-3 rounded space-x-4 flex items-center'>
+            <Link to="/" key={index} className='bg-gray-100 hover:bg-gray-200  md:mx-4 md:ml-6 px-5 py-3 rounded space-x-4 flex items-center'>
               <span className='text-2xl font-bold text-black'>
                 <img src={item.img} className='w-[65px] h-[65px] object-cover rounded-full' alt="" />
               </span>

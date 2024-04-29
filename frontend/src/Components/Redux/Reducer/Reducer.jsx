@@ -4,7 +4,7 @@ const initialState = {
     cardData: [],
     totalPrice: 0,
     totalItems: 0
-};
+}; 
 
 const cardItem = (state = initialState, action) => {
     switch (action.type) {
@@ -58,12 +58,13 @@ const addItemsWithQuantity = (state, action) => {
 };
 
 const removeCartItem = (state, action) => {
-    const filderItem = state.cardData.filter((item, index) => index !== action.payload);
-    return filderItem
+    const filterItem = state.cardData.filter((item, index) => index !== action.payload);
+    return filterItem
 }
 
 const increaseToQuantity = (state, action) => {
     const cartIndex = state.cardData.findIndex((item, index) => index === action.payload)
+    console.log(cartIndex); 
     let increase = []
     if (cartIndex > -1) {
         let quantity = state.cardData[cartIndex].quantity
@@ -80,11 +81,9 @@ const increaseToQuantity = (state, action) => {
 
 const decreaseToQuantity = (state, action) => {
     let cartItmIndex = state.cardData.findIndex((item, index) => index === action.payload)
-    console.log(cartItmIndex, "index");
     let items = [];
     if (cartItmIndex === action.payload) {
         let qty = state.cardData[cartItmIndex].quantity;
-        console.log(qty, "qty");
         if (qty > 1) {
             let updatedValue = state.cardData[cartItmIndex].quantity = qty - 1
             let updatedData = state.cardData.map((item, index) => {

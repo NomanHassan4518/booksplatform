@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 
 const BookModel = ({ book, onClose }) => {
     let [quantity, setQuantity] = useState(1)
-    let dispatch = useDispatch();
     let [modalIsOpen,isOpen] = useState(true)
-    let bookData = book;
+    let dispatch = useDispatch();
+    let bookData = book; 
     console.log(onClose);
 
     const handleCart = () => {
