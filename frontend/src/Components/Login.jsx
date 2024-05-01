@@ -24,7 +24,7 @@ const Login = ({ onClose }) => {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        let result = await fetch("http://localhost:5000/login", {
+        let result = await fetch("https://booksplatform-theta.vercel.app/login", {
             method: "POST",
             body: JSON.stringify({ email, password }),
             headers: {

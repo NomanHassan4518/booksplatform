@@ -27,21 +27,21 @@ const BookModel = ({ book, onClose }) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: "80%",
+          
             zIndex: "1000"
         },
     };
     return (
-        <div className=''>
+        <div className=' lg:w-[80%] lg:top-[50%] lg:left-[50%] lg:right-auto lg:bottom-auto lg:-mr-[50%] '>
             {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold fixed top-5 rounded-full p-1 right-5 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={onClose}
-                style={customStyles}
+                // style={customStyles}
                 contentLabel="Example Modal"
                 overlayClassName="Overlay2 "
             >
-                <div className="grid grid-cols-2 gap-5">
+                <div className="lg:grid grid-cols-2 gap-5">
                     <div className='w-full h-full'>
                         <img src={bookData.img} className='w-full h-full object-contain rounded' alt="" />
                     </div>

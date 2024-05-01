@@ -64,16 +64,16 @@ const Navbar = () => {
     }
     return (
         <>
-            <div className='md:sticky top-0 w-full  md:px-16 px-4 border-b-4 border-red-500 bg-white z-[100] '>
+            <div className='md:sticky top-0 w-full  xl:px-16  px-4 border-b-4 border-red-500 bg-white z-[100] '>
                 <div className='flex justify-between items-center'>
-                    <div className="flex justify-between items-center space-x-20">
+                    <div className="flex justify-between items-center  xl:space-x-20 lg:space-x-14">
                         <Link to="/" className='text-center  flex items-center space-x-2 py-4'>
                             <img className='w-[45px] object-cover' src="https://thebooksplatforms.com/wp-content/uploads/2023/09/cropped-888990-100x120.png" alt="" />
                             <h1 className='font-bold text-xl  md:w-[7rem] '>The Books Platform</h1>
                         </Link>
 
                         <div >
-                            <ul className='lg:flex hidden items-center space-x-10 text-xl '>
+                            <ul className='lg:flex hidden items-center xl:space-x-10 md:space-x-10 lg:space-x-4  text-xl '>
                                 <li className='relative '><Link to="/" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full '>Home</Link></li>
                                 <li className='relative group py-5'><p className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[3.5rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 group-hover:after:w-full cursor-default '>
                                     <div className="flex items-center">
@@ -134,7 +134,7 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    <div className='space-x-8 font-semibold text-xl  md:flex hidden items-center'>
+                    <div className='space-x-8 font-semibold  text-xl  md:flex hidden items-center'>
                         {
                             auth ? <button onClick={handleLogOut}>Logout</button> : <div className="space-x-8 font-semibold text-xl flex items-center">
                                 <button onClick={handleLoginbutton}>

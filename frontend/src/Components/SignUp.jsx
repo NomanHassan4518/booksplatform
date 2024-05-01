@@ -25,7 +25,7 @@ const SignUp = ({ onClose }) => {
 
     const handleSignup = async (e) => {
         e.preventDefault()
-        let result = await fetch("http://localhost:5000/signup", {
+        let result = await fetch("https://booksplatform-theta.vercel.app/signup", {
             method: "POST",
             body: JSON.stringify({ name, email, password }),
             headers: {
