@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { toast , ToastContainer } from 'react-toastify'
 
 const AddProducts = () => {
     let [name,setName]=useState("")
@@ -24,7 +23,7 @@ const AddProducts = () => {
         console.log(result);
 
         if(result){
-            toast.success("Add Book Successfully!")
+            console.log("send");
         }
     }
 
@@ -39,12 +38,11 @@ const AddProducts = () => {
                 <input type="text" className='border rounded p-3 focus:outline-none block w-full ' placeholder='Enter Image Category' value={category} onChange={(e)=>{setCategory(e.target.value)}} />
                 <input type="text" className='border rounded p-3 focus:outline-none block w-full ' placeholder='Enter Image SubCategory' value={subcategory} onChange={(e)=>{setSuCategory(e.target.value)}} />
                 <input type="text" className='border rounded p-3 focus:outline-none block w-full ' placeholder='Enter Image Description' value={desc} onChange={(e)=>{setDesc(e.target.value)}} />
-                <input type="text" className='border rounded p-3 focus:outline-none block w-full ' placeholder='Enter Image Stock' value={stock} onChange={(e)=>{setStock(e.target.value)}} />
+                <input type="number" className='border rounded p-3 focus:outline-none block w-full ' placeholder='Enter Image Stock' value={stock} onChange={(e)=>{setStock(e.target.value)}} />
 
                 <button onClick={submit} className='w-96 p-3 bg-blue-500 text-white mt-7 '>Sumbit</button>
             </div>
 
-            <ToastContainer position='top-right'/>
         </div>
     )
 }

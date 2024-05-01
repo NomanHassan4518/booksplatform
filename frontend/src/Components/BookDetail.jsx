@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import Modal from 'react-modal';
-import { IoCloseSharp } from "react-icons/io5";
 import { addToCart } from './Redux/Action/Action';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
-const BookModel = ({ book, onClose }) => {
+const BookDetail = () => {
     let [quantity, setQuantity] = useState(1)
-    let [modalIsOpen,isOpen] = useState(true)
     let dispatch = useDispatch();
-    let bookData = book; 
-    console.log(onClose);
+    let location=useLocation()
+    let bookData = location.state; 
+    console.log(location.state);
 
     const handleCart = () => {
         let cartData = {
@@ -17,32 +16,10 @@ const BookModel = ({ book, onClose }) => {
             quantity: quantity
         }
         dispatch(addToCart(cartData))
-        isOpen(onClose)
     }
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-          
-            zIndex: "1000"
-        },
-    };
     return (
-        <div className=' lg:w-[80%] lg:top-[50%] lg:left-[50%] lg:right-auto lg:bottom-auto lg:-mr-[50%] '>
-            {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold fixed top-5 rounded-full p-1 right-5 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={onClose}
-                // style={customStyles}
-                contentLabel="Example Modal"
-                overlayClassName="Overlay2 "
-            >
-                <div className="lg:grid grid-cols-2 gap-5">
-                    <div className='w-full h-full'>
+                <div className="lg:grid grid-cols-2 gap-5 p-5">
+                    <div className='w-full h-[75%]'>
                         <img src={bookData.img} className='w-full h-full object-contain rounded' alt="" />
                     </div>
 
@@ -59,18 +36,17 @@ const BookModel = ({ book, onClose }) => {
                                     <button className='flex justify-center  items-center w-16 border-s border-gray-400' onClick={() => { setQuantity(quantity + 1) }}>+</button>
                                 </div>
 
-                                <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>In Stock</div>
+                                {bookData.stock>=1? <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>In Stock</div> :
+                                <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>Stock Out</div>}
                             </div>
 
                             <div className='mt-4'>
-                                <button className='w-full bg-black rounded h-12 uppercase text-orange-500 font-semibold text-xl' onClick={handleCart}>Add to cart</button>
+                                <button disabled={bookData.stock==="0"} className={`w-full bg-black rounded ${bookData.stock==="0"?"cursor-not-allowed":"cursor-pointer"} h-12 uppercase text-orange-500 font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </Modal>
-        </div>
     )
 }
 
-export default BookModel
+export default BookDetail

@@ -19,7 +19,6 @@ const Navbar = () => {
     let price = useSelector((state) => state.totalPrice)
     let totalItems = useSelector((state) => state.totalItems)
     let auth = localStorage.getItem("user")
-    console.log(auth);
 
     const remove = (index) => {
         dispatch(removeToCart(index))
@@ -84,11 +83,11 @@ const Navbar = () => {
                                     <div className='menu shadow-inherit z-50 absolute mt-2 opacity-0 group-hover:opacity-100  invisible group-hover:visible -mx-24'>
                                         <div className=" flex items-center w-[50rem]  !mt-6">
                                             <div className='w-[40%] h-[23rem] bg-gray-100  px-4 p-6'>
-                                                <Link to="" className='text-xl font-semibold mb-2 hover:text-green-600 '>Quran Books</Link>
+                                                <Link to="/quran" className='text-xl font-semibold mb-2 hover:text-green-600 '>Quran Books</Link>
                                                 <div className='flex  flex-col space-y-4 ml-3 mt-4'>
-                                                    <Link to="" className='text-lg hover:text-blue-600'>Quran Book</Link>
+                                                    <Link to="/quranBook" className='text-lg hover:text-blue-600'>Quran Book</Link>
                                                     <Link to="" className='text-lg hover:text-blue-600'>About Quran</Link>
-                                                    <Link to="" className='text-lg hover:text-blue-600'>Quran Translations</Link>
+                                                    <Link to="/quranTranslation" className='text-lg hover:text-blue-600'>Quran Translations</Link>
                                                     <Link to="" className='text-lg hover:text-blue-600'>Quran Tafaseers</Link>
                                                 </div>
 
@@ -109,15 +108,15 @@ const Navbar = () => {
                                             </div>
                                             <div className='w-[40%] h-[23rem] bg-gray-100  px-4 py-3'>
                                                 <div className="mt-4">
-                                                    <Link to="" className='text-xl font-semibold mb-2 hover:text-green-600 '>Others Books</Link>
+                                                    <Link to="/otherBooks" className='text-xl font-semibold mb-2 hover:text-green-600 '>Others Books</Link>
                                                     <div className='mt-4'>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>Political</Link>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>History</Link>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>Novels</Link>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>Iqbaliat</Link>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>Biography</Link>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>Children Books</Link>
-                                                        <Link to="" className='text-xl  mb-2 hover:text-blue-600 block'>Education</Link>
+                                                        <Link to="/political" className='text-xl  mb-2 hover:text-blue-600 block'>Political</Link>
+                                                        <Link to="/history" className='text-xl  mb-2 hover:text-blue-600 block'>History</Link>
+                                                        <Link to="/novels" className='text-xl  mb-2 hover:text-blue-600 block'>Novels</Link>
+                                                        <Link to="/iqbaliyat" className='text-xl  mb-2 hover:text-blue-600 block'>Iqbaliat</Link>
+                                                        <Link to="/biography" className='text-xl  mb-2 hover:text-blue-600 block'>Biography</Link>
+                                                        <Link to="/children" className='text-xl  mb-2 hover:text-blue-600 block'>Children Books</Link>
+                                                        <Link to="/education" className='text-xl  mb-2 hover:text-blue-600 block'>Education</Link>
                                                         <Link to="" className='text-xl mb-2 hover:text-blue-600 block'>SUFISM</Link>
                                                     </div>
                                                 </div>

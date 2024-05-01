@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import img from '../data/download (2).png'
 import HomeTopSlider from './HomeTopSlider';
-import BookModel from './BookModel';
+import BookModel from './BookDetail';
 
 const Home = () => {
     const [modelOpen, setIsOpen] = useState(false);

@@ -7,7 +7,7 @@ let bookSchema = new mongoose.Schema({
     category:String,
     subcategory:String,
     desc:String,
-    stock:String,
+    stock:Number,
 })
 
 module.exports=mongoose.model("books",bookSchema)
