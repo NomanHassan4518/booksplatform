@@ -42,6 +42,11 @@ app.post("/addproduct", async (req, resp) => {
   resp.status(200, {data:result})
 });
 
+app.get("/books", async (req, resp) => {
+  let books = await Book.find(req.body);
+  resp.send(books);
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
