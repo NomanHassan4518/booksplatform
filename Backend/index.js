@@ -10,7 +10,7 @@ let User = require("./collections/user");
 let Book = require("./collections/book");
 
 app.get("/", (req, res) => {
-  res.send("api is ");
+  res.send("api is working!");
 });
 
 app.post("/signup", async (req, res) => {
@@ -39,8 +39,7 @@ app.post("/login", async (req, res) => {
 app.post("/addproduct", async (req, resp) => {
   let book = Book(req.body)
   let result = await book.save()
-  resp.send(result)
-  console.log(result);
+  resp.status(200, {data:result})
 });
 
 const PORT = process.env.PORT || 5000;

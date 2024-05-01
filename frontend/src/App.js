@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./Components/ScrollToTop";
 import Checkout from "./Components/Checkout/Checkout";
+import AddProducts from "./Components/AddProducts";
 
 function App() {
  
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/allbooks" element={<AllBooks/>}></Route>
           <Route path="/checkout" element={<Checkout/>}></Route>
+          <Route path="/addProduct" element={<AddProducts/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
