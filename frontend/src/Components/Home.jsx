@@ -1,47 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import img from '../data/download (2).png'
 import HomeTopSlider from './HomeTopSlider';
-import BookModel from './BookDetail';
+
 
 const Home = () => {
-    const [modelOpen, setIsOpen] = useState(false);
-    const [modelData, setModelData] = useState(null)
-
-    async function fetchData() {
-        try {
-            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1laGJvb2JAdGVzdC5jb20iLCJpZCI6IjY2MDViODBmYzkxMDBjNTc3Yjk0NzE0ZiIsImlhdCI6MTcxMTY1MDgzMX0.cBTQ2u9sR-t9lrFn329BGP_7yZIvReUvh8X_TD7e4cg'; // Replace 'YOUR_JWT_TOKEN' with your actual JWT token
-            
-            const response = await fetch('https://db-rns85fpkq-nomanhassan4518.vercel.app/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    // Optionally, you can include data to send to the server in the body
-                    // For example:
-                    name: 'exampleUser',
-                    email:"df",
-                    password: 'examplePassword'
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-
-            const data = await response.json();
-            console.log('Data:', data);
-        } catch (error) {
-            console.error('Error:', error.message);
-        }
-    }
-
+    let navigate=useNavigate()
     const handleBook = (book) => {
-        setIsOpen(true)
-        setModelData(book)
-        fetchData();
+        navigate(`/book/${book.id}`, {state:book})
     }
 
     const selling = [
@@ -105,7 +71,7 @@ const Home = () => {
 
                     <div className="grid 2xl:grid-cols-4  lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
                         {
-                            selling.map((book, index) => (
+                            selling.map((book) => (
                                 <div  key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
                                     <div className='md:w-[250px] md:h-[183px] w-[100%] h-[250px] '>
                                         <img className='w-full h-full md:object-cover object-fill group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
@@ -162,7 +128,6 @@ const Home = () => {
 
             </div>
 
-            {modelOpen && <BookModel book={modelData} onClose={()=>{setIsOpen(false)}}/>}
         </div>
     )
 }

@@ -8,8 +8,6 @@ const BookDetail = () => {
     let dispatch = useDispatch();
     let location=useLocation()
     let bookData = location.state; 
-    console.log(location.state);
-
     const handleCart = () => {
         let cartData = {
             Product: bookData,
@@ -18,21 +16,21 @@ const BookDetail = () => {
         dispatch(addToCart(cartData))
     }
     return (
-                <div className="lg:grid grid-cols-2 gap-5 p-5">
-                    <div className='w-full h-[75%]'>
-                        <img src={bookData.img} className='w-full h-full object-contain rounded' alt="" />
+                <div className="lg:flex  space-x-2 p-5">
+                    <div className='lg:w-[70%] border h-[75%]'>
+                        <img src={bookData.img} className='w-full lg:h-[500px]  rounded' alt="" />
                     </div>
 
-                    <div className='px-4 '>
+                    <div className='lg:px-4 lg:w-[80%] mt-5 lg:mt-0 '>
                         <p className='text-4xl font-bold mb-4 text-green-600'>{bookData.name}</p>
-                        <p className='text-xl text-[#bf009e] leading-8'>{bookData.desc} We deal in all kinds of Islamic, Iqbaliyat, and other Urdu reading books. Now you can order Urdu Books from <b>The Books PlatForm</b> and get them delivered to your doorstep all over Pakistan within 3 working days. Order Now.</p>
+                        <p className='text-xl  leading-8'>{bookData.desc} We deal in all kinds of Islamic, Iqbaliyat, and other Urdu reading books. Now you can order Urdu Books from <b>The Books PlatForm</b> and get them delivered to your doorstep all over Pakistan within 3 working days. Order Now.</p>
                         <p className='mt-5 text-2xl font-bold text-blue-600'><span className='text-red-600'>Price:</span> RS {bookData.price}</p>
 
                         <div className="mt-11">
-                            <div className="flex items-center space-x-9">
+                            <div className="flex items-center lg:space-x-9 space-x-2">
                                 <div className="flex bg-black text-white font-bold text-lg h-10 rounded-md">
                                     <button className='flex justify-center items-center w-16 border-e border-gray-400 cursor-pointer' onClick={() => { setQuantity(quantity - 1) }} disabled={quantity <= 1}>-</button>
-                                    <span className='flex justify-center items-center lg:w-32 w-5  '>{quantity}</span>
+                                    <span className='flex justify-center items-center lg:w-32 w-10  '>{quantity}</span>
                                     <button className='flex justify-center  items-center w-16 border-s border-gray-400' onClick={() => { setQuantity(quantity + 1) }}>+</button>
                                 </div>
 

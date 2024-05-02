@@ -23,14 +23,14 @@ const Biography = () => {
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
             {
                 biography.map((book) => (
-                    <div  key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
-                    <div className='md:w-[250px] md:h-[183px]  w-[100%] h-[250px] '>
-                        <img className='w-full h-full md:object-cover object-fill group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
+                    <div className='bg-gray-200  rounded-lg cursor-pointer' onClick={() => handleBook(book)}>
+                    <div className='w-full h-[300px] bg-gray-200 rounded-lg '>
+                        <img src={book.img} className='w-full h-full rounded-lg  ' alt="" />
                     </div>
-                    <div>
-                        <p className='md:text-xl font-semibold mt-3 md:mt-0 mb-3 uppercase'>{book.name}</p>
-                        <p className='text-gray-500  '>{book.desc}</p>
-                        <p className="mt-3 text-lg font-semibold">RS {book.price}</p>
+                    <div className="my-3 px-2">
+                        <h1 className='text-xl font-semibold '>{book.name}</h1>
+                        <p className='mt-2 h-[45px] overflow-hidden text-gray-500 '>{book.desc}</p>
+                        <p className='mt-2 text-lg text-red-600 '>RS {book.price}</p>
                     </div>
                 </div>
                 ))

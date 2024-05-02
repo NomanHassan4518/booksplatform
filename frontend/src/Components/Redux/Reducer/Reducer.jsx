@@ -40,8 +40,9 @@ const cardItem = (state = initialState, action) => {
 export default cardItem;
 
 const addItemsWithQuantity = (state, action) => {
+    console.log(action);
     const cartIndex = state.cardData?.findIndex(
-        (item) => item.Product.id === action.payload.Product.id);
+        (item) => item.Product._id === action.payload.Product._id);
     let newItem = [];
     if (cartIndex > -1) {
         const updateQuantity = state.cardData[cartIndex].quantity += action.payload.quantity;

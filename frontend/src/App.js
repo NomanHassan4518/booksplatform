@@ -3,6 +3,7 @@ import AllBooks from "./Components/AllBooks";
 import Footer from "./Components/Footer";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
+import Spinner from './Components/Spinner'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./Components/ScrollToTop";
 import Checkout from "./Components/Checkout/Checkout";
@@ -45,13 +46,13 @@ const App = () => {
       }
     };
     fetchData();
-  }, [data]);
+  }, []);
 
   localStorage.setItem('books' , JSON.stringify(data))
 let allbooks=localStorage.getItem('books')
   return (
     <div >
-      {/* {loading ? <div className="w-full h-screen flex items-center justify-center ">Loading...</div> : null} */}
+      {loading ? <Spinner/> : null}
       <BrowserRouter>
       <ScrollToTop/>
         <Navbar />
