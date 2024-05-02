@@ -42,10 +42,44 @@ app.post("/addproduct", async (req, resp) => {
   resp.status(200, {data:result})
 });
 
+app.put("/book", async (req, res) => {
+  try {
+    const updates = req.body; // Array of book updates [{ bookId, quantity }, ...]
+    // Loop through each update
+    for (const update of updates.orderItems) {
+      const { bookId, quantity } = update;
+
+      // Find the book by ID
+      let book = await Book.findById(bookId);
+
+      if (!book) {
+        return res.status(404).json({ error: `Book with ID ${bookId} not found` });
+      }
+
+      // Update the stock
+      book.stock -= quantity;
+      await book.save();
+    }
+
+    res.status(200).json({ message: "Stocks updated successfully" });
+  } catch (error) {
+    console.error("Error updating stocks:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+
+
+
+
 app.get("/books", async (req, resp) => {
   let books = await Book.find(req.body);
   resp.send(books);
 });
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

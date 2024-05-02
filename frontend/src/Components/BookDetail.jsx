@@ -31,7 +31,7 @@ const BookDetail = () => {
                                 <div className="flex bg-black text-white font-bold text-lg h-10 rounded-md">
                                     <button className='flex justify-center items-center w-16 border-e border-gray-400 cursor-pointer' onClick={() => { setQuantity(quantity - 1) }} disabled={quantity <= 1}>-</button>
                                     <span className='flex justify-center items-center lg:w-32 w-10  '>{quantity}</span>
-                                    <button className='flex justify-center  items-center w-16 border-s border-gray-400' onClick={() => { setQuantity(quantity + 1) }}>+</button>
+                                    <button className='flex justify-center  items-center w-16 border-s border-gray-400' onClick={() => { setQuantity(quantity + 1) }} disabled={quantity>=bookData.stock}>+</button>
                                 </div>
 
                                 {bookData.stock>=1? <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>In Stock</div> :
@@ -39,7 +39,7 @@ const BookDetail = () => {
                             </div>
 
                             <div className='mt-4'>
-                                <button disabled={bookData.stock==="0"} className={`w-full bg-black rounded ${bookData.stock==="0"?"cursor-not-allowed":"cursor-pointer"} h-12 uppercase text-orange-500 font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
+                                <button disabled={bookData.stock<=0} className={`w-full bg-black rounded ${bookData.stock==0?"cursor-not-allowed":"cursor-pointer"} h-12 uppercase text-orange-500 font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
                             </div>
                         </div>
                     </div>

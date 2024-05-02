@@ -1,13 +1,40 @@
 import React from 'react'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { emptyCart } from '../Redux/Action/Action'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Spinner from '../Spinner';
 
 const Order = () => {
   let productData = useSelector((state) => state.cardData)
   let totalPrice = useSelector((state) => state.totalPrice)
+  const [loading, setLoading] = useState(false);
   const [check, setCheck] = useState("cash")
+let dispatch=useDispatch()
+let navigate=useNavigate()
 
+let orderItems= productData.map((book) => ({
+  bookId: book.Product._id,
+  quantity: book.quantity, // Default quantity
+}))
 
+console.log(orderItems);
+
+  const handleOrder = async () => {
+    try {
+      setLoading(true)
+      const response = await axios.put(`http://localhost:5000/book`, { orderItems });
+      console.log('Order placed successfully:', response);
+      dispatch(emptyCart())
+      navigate("/")
+    } catch (error) {
+      console.error('Error placing order:', error);
+      // Handle error
+    } finally{
+      setLoading(false)
+    }
+  };
 
   let paymentMethod = [
     {
@@ -36,7 +63,8 @@ const Order = () => {
   }))
 
   return (
-    <div className='mt-6 lg:ml-12 '>
+    <>
+    {loading ? <Spinner/>:<div className='mt-6 lg:ml-12 '>
       <h1 className='text-2xl font-bold mb-6'>Your Order</h1>
 
       <div className="mt-3 flex justify-between   items-center font-semibold px-3 bg-gray-300 rounded-md h-12">
@@ -113,10 +141,12 @@ const Order = () => {
       </div>
 
       <div className='w-full mt-3'>
-        <button className='w-full  bg-green-700 text-white py-3 rounded-md font-semibold'>Place Order</button>
+        <button className='w-full  bg-green-700 text-white py-3 rounded-md font-semibold' onClick={handleOrder}>Place Order</button>
       </div>
 
-    </div>
+    </div>}
+    
+    </>
   )
 }
 

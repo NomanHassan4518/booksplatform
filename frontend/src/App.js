@@ -52,8 +52,7 @@ const App = () => {
 let allbooks=localStorage.getItem('books')
   return (
     <div >
-      {loading ? <Spinner/> : null}
-      <BrowserRouter>
+      {loading ? <Spinner/> :  <BrowserRouter>
       <ScrollToTop/>
         <Navbar />
         <Routes>
@@ -75,7 +74,8 @@ let allbooks=localStorage.getItem('books')
           <Route path="/education" element={<Education/>}></Route>
         </Routes>
         <Footer/>
-      </BrowserRouter>
+      </BrowserRouter>}
+     
     </div>
   );
 }

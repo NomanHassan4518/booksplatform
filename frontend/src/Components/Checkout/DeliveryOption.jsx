@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import CheckOutTextArea from './CheckOutTextArea'
 
-const DeliveryOption = () => {
+const DeliveryOption = ({userData}) => {
     let person = localStorage.getItem("user")
     let data = JSON.parse(person)
     let formFieldName = {
         firstName: data.name,
-        phone: "",
-        email: data.email
+        email: data.email,
+        phone: "", 
+        note:""
     }
-
     const [field, setField] = useState(formFieldName)
+
+    userData(field)
+
 
     return (
         <div className='md:px-4'>

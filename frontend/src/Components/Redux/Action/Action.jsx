@@ -28,3 +28,10 @@ export const decreaseToQuantity=(index)=>{
         payload:index
     }
 }
+
+export const emptyCart=()=>{
+    return {
+        type:"emptyCart",
+        payload:''
+    }
+}

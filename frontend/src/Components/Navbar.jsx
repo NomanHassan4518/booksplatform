@@ -200,12 +200,12 @@ const Navbar = () => {
                     <div className={`${cartData.length === 0 ? "hidden" : "block pb-24"}`}>
                         {
                             cartData.map((item, index) => (
-                                <div key={index} className={`w-full ${index === 0 ? "mt-0" : "mt-4"} shadow py-4 flex items-center justify-around border`}>
+                                <div key={index} className={`w-full ${index === 0 ? "mt-0" : "mt-4"} shadow py-4 flex items-center group justify-around border`}>
 
-                                    <div className='group cursor-pointer relative'>
+                                    <div className=' cursor-pointer relative'>
                                         <img src={item.Product?.img} alt="" className='p-[6px] h-28' />
                                         <div className='absolute top-0 bg-black bg-opacity-30 box-border h-full w-full scale-0 group-hover:scale-90  flex items-center justify-center text-w transition-all  duration-500   ease-in-out rounded-lg' onClick={() => { remove(index) }}>
-                                            <AiOutlineClose className='text-black bg-white rounded-full text-[15px]' />
+                                            <AiOutlineClose className='text-black bg-white rounded-full text-[25px]' />
                                         </div>
                                     </div>
 
@@ -219,7 +219,7 @@ const Navbar = () => {
 
                                                 <button className='w-11'> {item.quantity}</button>
 
-                                                <button className='flex justify-center items-center w-8 lg:w-10 border-s border-gray-400 cursor-pointer' onClick={() => { increaseQuantity(index) }}>+</button>
+                                                <button className='flex justify-center items-center w-8 lg:w-10 border-s border-gray-400 cursor-pointer' disabled={item.quantity>=item.Product?.stock} onClick={() => { increaseQuantity(index) }}>+</button>
                                             </div>
 
                                             <div className='h-10 flex justify-center items-center mx-4'>

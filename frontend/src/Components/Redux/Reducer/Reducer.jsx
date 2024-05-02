@@ -30,6 +30,12 @@ const cardItem = (state = initialState, action) => {
                 let itemAdd = decreaseToQuantity(state, action);
                 return generateFinalState(state, itemAdd);
             }
+
+        case "emptyCart":
+            {
+                let itemAdd = emptyCart(state, action);
+                return generateFinalState(state, itemAdd);
+            }
         default:
             return state;
     }
@@ -40,7 +46,6 @@ const cardItem = (state = initialState, action) => {
 export default cardItem;
 
 const addItemsWithQuantity = (state, action) => {
-    console.log(action);
     const cartIndex = state.cardData?.findIndex(
         (item) => item.Product._id === action.payload.Product._id);
     let newItem = [];
@@ -114,6 +119,10 @@ const calculateItems = (itemAdd) => {
         return finalItems += item.quantity
     })
     return finalItems
+}
+
+const emptyCart=(state)=>{
+return state.cardData=[]
 }
 
 const generateFinalState = (state, itemAdd) => {
