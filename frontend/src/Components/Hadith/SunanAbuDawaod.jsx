@@ -1,28 +1,27 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Biography = () => {
-    let books=localStorage.getItem('books')
-    let Books=JSON.parse(books)
-    let biography=Books?.filter((book)=>book.subcategory==='Biography')
-    let navigate=useNavigate()
-    const handleBook = (book) => {
-        console.log(book);
-        navigate(`/book/${book._id}`, {state:book})
-    }
+const SunanAbuDawaod = () => {
+  let books=localStorage.getItem('books')
+  let Books=JSON.parse(books)
+  let abuDawood=Books?.filter((book)=>book.subcategory==='Sunan Abu Dawood')
+  let navigate=useNavigate()
 
-
+  const handleBook = (book) => {
+      console.log(book);
+      navigate(`/book/${book._id}`, {state:book})
+  }
   return (
     <div className='md:px-4 px-2 md:mt-12  mt-4 pb-12'>
     <div className='border md:p-5 p-2 rounded shadow '>
         <div className="flex items-center justify-between p-3">
-            <h1 className='text-2xl font-bold uppercase '>Biography Books</h1>
-            <p className='text-lg text-gray-500'>{biography?.length} books</p>
+            <h1 className='text-2xl font-bold uppercase '>Sunan Abu Dawood</h1>
+            <p className='text-lg text-gray-500'>{abuDawood?.length} books</p>
         </div>
 
         <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-12 gap-10  mt-3 pb-6">
             {
-                biography?.map((book) => (
+                abuDawood?.map((book) => (
                     <div className='shadow-lg border border-gray-700 lg:hover:scale-105 duration-500 ease-in-out bg-gray-200  rounded-lg cursor-pointer' onClick={() => handleBook(book)}>
                         <div className='w-full 2xl:h-[430px] h-[250px] border-b border-black bg-white  rounded-t-lg '>
                             <img src={book.img} className='w-full h-full rounded-t-lg object-contain ' alt="" />
@@ -41,4 +40,4 @@ const Biography = () => {
   )
 }
 
-export default Biography
+export default SunanAbuDawaod

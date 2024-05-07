@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const QuranTranslation = () => {
     let books=localStorage.getItem('books')
     let Books=JSON.parse(books)
-    let quranTranslation=Books.filter((book)=>book.subcategory==='Quran Translation')
+    let quranTranslation=Books?.filter((book)=>book.subcategory==='Quran Translation')
     let navigate=useNavigate()
     const handleBook = (book) => {
         console.log(book);
@@ -13,26 +13,26 @@ const QuranTranslation = () => {
 
 
   return (
-    <div className='px-4 mt-12  pb-12'>
-    <div className='border p-5 rounded shadow '>
-        <div className="flex items-center justify-between">
-            <h1 className='text-2xl font-bold'>Quran Translation</h1>
-            <p  className='text-lg text-gray-500'>{quranTranslation?.length} books</p>
+    <div className='md:px-4 px-2 md:mt-12  mt-4 pb-12'>
+    <div className='border md:p-5 p-2 rounded shadow '>
+        <div className="flex items-center justify-between p-3">
+            <h1 className='text-2xl font-bold'>Quran Translations</h1>
+            <p className='text-lg text-gray-500'>{quranTranslation?.length} books</p>
         </div>
 
-        <div className="grid lg:grid-cols-4 grid-cols-1 gap-8 mt-10 pb-6">
+        <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-12 gap-10  mt-3 pb-6">
             {
-                quranTranslation.map((book) => (
-                    <div className='bg-gray-200  rounded-lg cursor-pointer' onClick={() => handleBook(book)}>
-                    <div className='w-full h-[300px] bg-gray-200 rounded-lg '>
-                        <img src={book.img} className='w-full h-full rounded-lg  ' alt="" />
+                quranTranslation?.map((book) => (
+                    <div className='shadow-lg border border-gray-700 lg:hover:scale-105 duration-500 ease-in-out bg-gray-200  rounded-lg cursor-pointer' onClick={() => handleBook(book)}>
+                        <div className='w-full 2xl:h-[430px] h-[250px] border-b border-black bg-white  rounded-t-lg '>
+                            <img src={book.img} className='w-full h-full rounded-t-lg object-contain ' alt="" />
+                        </div> 
+                        <div className="my-3 2xl:mt-6 px-2">
+                            <h1 className='2xl:text-3xl text-xl font-semibold 2xl:h-[65px] h-[55px] overflow-hidden  '>{book.name}</h1>
+                            <p className='mt-2 2xl:mt-4 2xl:text-xl 2xl:h-[55px] h-[45px] overflow-hidden text-gray-600 '>{book.desc}</p>
+                            <p className='mt-2 2xl:text-2xl text-lg text-red-600 '>RS {book.price}</p>
+                        </div>
                     </div>
-                    <div className="my-3 px-2">
-                        <h1 className='text-xl font-semibold '>{book.name}</h1>
-                        <p className='mt-2 h-[45px] overflow-hidden text-gray-500 '>{book.desc}</p>
-                        <p className='mt-2 text-lg text-red-600 '>RS {book.price}</p>
-                    </div>
-                </div>
                 ))
             }
         </div>

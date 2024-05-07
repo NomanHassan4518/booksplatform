@@ -54,7 +54,7 @@ const Navbar = () => {
     }
 
     const handleLogOut = () => {
-        localStorage.clear();
+        localStorage.removeItem("user");
         navigate("/")
     }
 
@@ -86,29 +86,29 @@ const Navbar = () => {
                                                 <Link to="/quran" className='text-xl font-semibold mb-2 hover:text-green-600 '>Quran Books</Link>
                                                 <div className='flex  flex-col space-y-4 ml-3 mt-4'>
                                                     <Link to="/quranBook" className='text-lg hover:text-blue-600'>Quran Mushaf</Link>
-                                                    <Link to="" className='text-lg hover:text-blue-600'>About Quran</Link>
+                                                    <Link to="/aboutQuran" className='text-lg hover:text-blue-600'>About Quran</Link>
                                                     <Link to="/quranTranslation" className='text-lg hover:text-blue-600'>Quran Translations</Link>
-                                                    <Link to="" className='text-lg hover:text-blue-600'>Quran Tafaseers</Link>
+                                                    <Link to="/qurantafaseer" className='text-lg hover:text-blue-600'>Quran Tafaseer</Link>
                                                 </div>
 
                                             </div>
                                             <div className='w-[40%] h-[23rem] bg-gray-200  px-4 py-3'>
                                                 <div className="mt-4">
-                                                    <Link to="" className='text-xl font-semibold mb-2 hover:text-green-600 '>Hadith Books</Link>
+                                                    <Link to="/hadith" className='text-xl font-semibold mb-2 hover:text-green-600 '>Hadith Books</Link>
                                                     <div className='flex  flex-col space-y-4 ml-3 mt-4'>
-                                                        <Link to="" className='text-lg hover:text-blue-600'>Sahih Bukhari</Link>
-                                                        <Link to="" className='text-lg hover:text-blue-600'>Sahih Muslim</Link>
-                                                        <Link to="" className='text-lg hover:text-blue-600'>Sunan Abu Dawood</Link>
-                                                        <Link to="" className='text-lg hover:text-blue-600'>Sunan Ibn Majah</Link>
-                                                        <Link to="" className='text-lg hover:text-blue-600'>Sunan Nasai</Link>
-                                                        <Link to="" className='text-lg hover:text-blue-600'>Sunan Tirmidhi</Link>
+                                                        <Link to="/sahihBukhari" className='text-lg hover:text-blue-600'>Sahih Bukhari</Link>
+                                                        <Link to="/sahihMuslim" className='text-lg hover:text-blue-600'>Sahih Muslim</Link>
+                                                        <Link to="/sunanAbuDawood" className='text-lg hover:text-blue-600'>Sunan Abu Dawood</Link>
+                                                        <Link to="/sunanIbnMajah" className='text-lg hover:text-blue-600'>Sunan Ibn Majah</Link>
+                                                        <Link to="/sunanNasai" className='text-lg hover:text-blue-600'>Sunan Nasai</Link>
+                                                      
 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className='w-[40%] h-[23rem] bg-gray-100  px-4 py-3'>
                                                 <div className="mt-4">
-                                                    <Link to="/otherBooks" className='text-xl font-semibold mb-2 hover:text-green-600 '>Others Books</Link>
+                                                    <Link to="/otherBooks" className='text-xl font-semibold mb-2 hover:text-green-600 '>Collections</Link>
                                                     <div className='mt-4'>
                                                         <Link to="/political" className='text-xl  mb-2 hover:text-blue-600 block'>Political</Link>
                                                         <Link to="/history" className='text-xl  mb-2 hover:text-blue-600 block'>History</Link>
@@ -117,7 +117,7 @@ const Navbar = () => {
                                                         <Link to="/biography" className='text-xl  mb-2 hover:text-blue-600 block'>Biography</Link>
                                                         <Link to="/children" className='text-xl  mb-2 hover:text-blue-600 block'>Children Books</Link>
                                                         <Link to="/education" className='text-xl  mb-2 hover:text-blue-600 block'>Education</Link>
-                                                        <Link to="" className='text-xl mb-2 hover:text-blue-600 block'>SUFISM</Link>
+                                                        <Link to="/sufism" className='text-xl mb-2 hover:text-blue-600 block'>SUFISM</Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@ const Navbar = () => {
                                 <li className='relative'><Link to="/allbooks" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Shop</Link></li>
                                 <li className='relative'><Link to="/" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>FAQ</Link></li>
                                
-                                <li className='relative'><Link to="/addProduct" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Add Product</Link></li>
+                                {/* <li className='relative'><Link to="/addProduct" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Add Product</Link></li> */}
                             </ul>
                         </div>
                     </div>

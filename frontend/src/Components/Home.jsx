@@ -5,61 +5,17 @@ import HomeTopSlider from './HomeTopSlider';
 
 
 const Home = () => {
-    let navigate=useNavigate()
+    let navigate = useNavigate()
     const handleBook = (book) => {
-        navigate(`/book/${book.id}`, {state:book})
+        navigate(`/book/${book._id}`, { state: book })
     }
 
-    const selling = [
-        {
-            id:1,
-            img: "https://thebooksplatforms.com/wp-content/uploads/2023/09/20230925_154640-scaled.jpg",
-            name: "Muamalat-E-Rasool SAWW",
-            price: "1200.00",
-            desc: "Muamalat-E-Rasool SAWW is one of  the  famous book  which is written by Qayyum Nizami.",
-            stock:0
-        },
-        {
-            id:2,
-            img: "https://thebooksplatforms.com/wp-content/uploads/2023/09/20230908_114515-300x300.jpg",
-            name: "Haalim",
-            price: "2000.00",
-            desc: "Haalim is one of the famous novel which is written by Nimra Ahmed.",
-            stock:10
-        },
-        {
-            id:3,
-            img: "https://thebooksplatforms.com/wp-content/uploads/2023/09/20230904_132013-300x300.jpg",
-            name: "Peer e Kamil",
-            price: "1400.00",
-            desc: "Peer e Kamil is one of the  famous novel which is written by Umairah Ahmed.",
-            stock:10
-        },
-        {
-            id:4,
-            img: "https://thebooksplatforms.com/wp-content/uploads/2023/09/20230904_124451-300x300.jpg",
-            name: "Jannat ky Pattay",
-            price: "2200.00",
-            desc: "Jannat ky Pattay is one of the famous novel which is written by Nimra Ahmed.",
-            stock:10
-        },
-        {
-            id:5,
-            img: "https://thebooksplatforms.com/wp-content/uploads/2023/08/aek-general-2-300x300.jpeg",
-            name: "Aik General Se Interview",
-            price: "800.00",
-            desc: "Aik General Se Interview is one of  the  famous book  which is written by Mubeen Ghaznavi.",
-            stock:10
-        },
-        {
-            id:6,
-            img: "https://thebooksplatforms.com/wp-content/uploads/2023/09/20230925_154652-300x300.jpg",
-            name: "Muamalat Hazarat Ali",
-            price: "700.00",
-            desc: "Muamalat Hazarat Ali is one of  the  famous book  which is written by Qayyum Nizami.",
-            stock:10
-        },
-    ]
+    let books = localStorage.getItem('books')
+    let Books = JSON.parse(books)
+    let bookNamesToFilter = ["Muamalat-E-Rasool SAWW", "Chengez Khan", "Global Warming", "God, Science, And Self", "2020: World of War","Kashf Ul Asrar"];
+    let topBooks = Books?.filter(book => bookNamesToFilter.includes(book.name));
+    console.log(topBooks);
+
 
 
     return (
@@ -77,14 +33,14 @@ const Home = () => {
 
                     <div className="grid 2xl:grid-cols-4  lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
                         {
-                            selling.map((book) => (
-                                <div  key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
+                            topBooks?.map((book) => (
+                                <div key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
                                     <div className='md:w-[250px] md:h-[183px] w-[100%] h-[250px] '>
-                                        <img className='w-full h-full md:object-cover object-fill group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
+                                        <img className='w-full h-full md:object-contain object-fill group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
                                     </div>
-                                    <div>
+                                    <div className='w-[70%]'>
                                         <p className='md:text-xl font-semibold mt-3 md:mt-0 mb-3 uppercase'>{book.name}</p>
-                                        <p className='text-gray-500  '>{book.desc}</p>
+                                        <p className='text-gray-500 h-[45px] overflow-hidden '>{book.desc}</p>
                                         <p className="mt-3 text-lg font-semibold">RS {book.price}</p>
                                     </div>
                                 </div>
@@ -94,7 +50,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className='-mt-1 relative h-[25rem] ' style={{ backgroundImage: `url("https://thebooksplatforms.com/wp-content/uploads/2023/08/wp9166934-4k-books-wallpapers-scaled.jpg")`,  width: "100%", backgroundAttachment: "fixed", backgroundPosition: "center", backgroundSize: "cover" }}>
+            <div className='-mt-1 relative h-[25rem] ' style={{ backgroundImage: `url("https://thebooksplatforms.com/wp-content/uploads/2023/08/wp9166934-4k-books-wallpapers-scaled.jpg")`, width: "100%", backgroundAttachment: "fixed", backgroundPosition: "center", backgroundSize: "cover" }}>
                 <div className='md:px-12 px-4 text-white  absolute flex font-serif items-center w-full h-full'>
                     <div className='z-50'>
                         <p className='md:text-3xl text-2xl font-bold'>

@@ -28,7 +28,6 @@ const AddProducts = () => {
             console.log(result);
 
             if (result) {
-                console.log("send");
                 toast.success("Add Book Successfully!")
             }
         } finally {

@@ -22,6 +22,15 @@ import Iqbaliyat from "./Components/OtherBooks/Iqbaliyat";
 import Biography from "./Components/OtherBooks/Biography";
 import Education from "./Components/OtherBooks/Education";
 import Children from "./Components/OtherBooks/Children";
+import AboutQuran from "./Components/Quran/AboutQuran";
+import QuranTafaseers from "./Components/Quran/QuranTafaseers";
+import Sufism from "./Components/OtherBooks/Sufism";
+import Hadith from "./Components/Hadith/Hadith";
+import SahihBukhari from "./Components/Hadith/SahihBukhari";
+import SahihMuslim from "./Components/Hadith/SahihMuslim";
+import SunanAbuDawaod from "./Components/Hadith/SunanAbuDawaod";
+import SunanIbnMajah from "./Components/Hadith/SunanIbnMajah";
+import SunanNasai from "./Components/Hadith/SunanNasai";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -49,7 +58,7 @@ const App = () => {
       }
     };
     fetchData();
-  }, [response.message]);
+  }, [response.message],);
 
   localStorage.setItem('books' , JSON.stringify(data))
   let allbooks=localStorage.getItem('books')
@@ -66,7 +75,15 @@ const App = () => {
           <Route path="/addProduct" element={<AddProducts/>}></Route>
           <Route path="/quran" element={<Quran/>}></Route>
           <Route path="/quranBook" element={<QuranBook/>}></Route>
+          <Route path="/aboutQuran" element={<AboutQuran/>}></Route>
           <Route path="/quranTranslation" element={<QuranTranslation/>}></Route>
+          <Route path="/qurantafaseer" element={<QuranTafaseers/>}></Route>
+          <Route path="/hadith" element={<Hadith/>}></Route>
+          <Route path="/sahihBukhari" element={<SahihBukhari/>}></Route>
+          <Route path="/sahihMuslim" element={<SahihMuslim/>}></Route>
+          <Route path="/sunanAbuDawood" element={<SunanAbuDawaod/>}></Route>
+          <Route path="/sunanIbnMajah" element={<SunanIbnMajah/>}></Route>
+          <Route path="/sunanNasai" element={<SunanNasai/>}></Route>
           <Route path="/otherBooks" element={<OtherBooks/>}></Route>
           <Route path="/political" element={<Political/>}></Route>
           <Route path="/history" element={<History/>}></Route>
@@ -75,6 +92,7 @@ const App = () => {
           <Route path="/biography" element={<Biography/>}></Route>
           <Route path="/children" element={<Children/>}></Route>
           <Route path="/education" element={<Education/>}></Route>
+          <Route path="/sufism" element={<Sufism/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>}
