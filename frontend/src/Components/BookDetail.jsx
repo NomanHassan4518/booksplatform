@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { addToCart } from './Redux/Action/Action';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 const BookDetail = () => {
@@ -8,13 +8,18 @@ const BookDetail = () => {
     let dispatch = useDispatch();
     let location=useLocation()
     let bookData = location.state; 
+    let cartData = useSelector((state) => state.cardData)
+
+    let bookIndex =cartData.findIndex((item=>item.Product._id===bookData._id))
+  
     const handleCart = () => {
-        let cartData = {
+        let cartItem = {
             Product: bookData,
             quantity: quantity
-        }
-        dispatch(addToCart(cartData))
-    }
+        };
+        dispatch(addToCart(cartItem));
+    };
+
     return (
                 <div className="lg:flex  space-x-2 p-5">
                     <div className='lg:w-[70%] border h-[75%]'>
@@ -31,15 +36,14 @@ const BookDetail = () => {
                                 <div className="flex bg-black text-white font-bold text-lg h-10 rounded-md">
                                     <button className='flex justify-center items-center w-16 border-e border-gray-400 cursor-pointer' onClick={() => { setQuantity(quantity - 1) }} disabled={quantity <= 1}>-</button>
                                     <span className='flex justify-center items-center lg:w-32 w-10  '>{quantity}</span>
-                                    <button className='flex justify-center  items-center w-16 border-s border-gray-400' onClick={() => { setQuantity(quantity + 1) }} disabled={quantity>=bookData.stock}>+</button>
+                                    <button className='flex justify-center  items-center w-16 border-s border-gray-400' onClick={() => { setQuantity(quantity + 1) }} disabled={quantity>=bookData.stock  || (cartData.length!==0?quantity===bookData.stock-cartData[bookIndex]?.quantity:null)  }>+</button>
                                 </div>
 
-                                {bookData.stock>=1? <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>In Stock</div> :
-                                <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>Stock Out</div>}
+                                <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>{bookData.stock>=1 && bookData.stock!==cartData[bookIndex]?.quantity? "Stock In" :"Stock Out"}</div>
                             </div>
 
                             <div className='mt-4'>
-                                <button disabled={bookData.stock<=0} className={`w-full bg-black rounded ${bookData.stock==0?"cursor-not-allowed":"cursor-pointer"} h-12 uppercase text-orange-500 font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
+                                <button disabled={bookData.stock<=0 || bookData.stock===cartData[bookIndex]?.quantity || quantity>bookData.stock-cartData[bookIndex]?.quantity } className={`w-full  rounded ${bookData.stock===0 || bookData.stock===cartData[bookIndex]?.quantity || quantity>bookData.stock-cartData[bookIndex]?.quantity?"cursor-not-allowed bg-red-600 text-white ":"cursor-pointer text-orange-500 bg-black"} h-12 uppercase  font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
                             </div>
                         </div>
                     </div>

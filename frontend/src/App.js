@@ -10,8 +10,8 @@ import Checkout from "./Components/Checkout/Checkout";
 import AddProducts from "./Components/AddProducts";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import BookDetail from "./Components/BookDetail";
 import Quran from "./Components/Quran/Quran";
-import BookModel from "./Components/BookDetail";
 import QuranBook from "./Components/Quran/QuranBook";
 import QuranTranslation from "./Components/Quran/QuranTranslation";
 import Political from "./Components/OtherBooks/Political";
@@ -26,8 +26,12 @@ import Children from "./Components/OtherBooks/Children";
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
+  let [response, setResponse] = useState('');
 
-  
+  const message = (message) => {
+    setResponse(message)
+}
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +39,9 @@ const App = () => {
         setLoading(true);
   
         const response = await axios.get('https://booksplatform-theta.vercel.app/books');
-  
-        const data = response.data;
-  
-        setData(data);
+        const mybooks = response.data;
+        setData(mybooks);
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -46,10 +49,10 @@ const App = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [response.message]);
 
   localStorage.setItem('books' , JSON.stringify(data))
-let allbooks=localStorage.getItem('books')
+  let allbooks=localStorage.getItem('books')
   return (
     <div >
       {loading ? <Spinner/> :  <BrowserRouter>
@@ -58,8 +61,8 @@ let allbooks=localStorage.getItem('books')
         <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/allbooks"  element={<AllBooks books={JSON.parse(allbooks)}/>}></Route>
-          <Route path="/book/:name"  element={<BookModel/>}></Route>
-          <Route path="/checkout" element={<Checkout/>}></Route>
+          <Route path="/book/:name"  element={<BookDetail/>}></Route>
+          <Route path="/checkout" element={<Checkout responseAPI={message}/>}></Route>
           <Route path="/addProduct" element={<AddProducts/>}></Route>
           <Route path="/quran" element={<Quran/>}></Route>
           <Route path="/quranBook" element={<QuranBook/>}></Route>

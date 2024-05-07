@@ -1,11 +1,15 @@
 import React from 'react'
 import { FaFacebook ,FaMobileAlt,FaQuestion  } from "react-icons/fa";
 import { MdRoundaboutRight,MdMarkEmailUnread ,MdOutlinePrivacyTip    } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { LuFileTerminal } from "react-icons/lu";
 import { GiReturnArrow } from "react-icons/gi";
 
 const Footer = () => {
+    let location=useLocation()
+    if(location.pathname==='/checkout' || location.pathname===`/book/${location?.state?._id}`){
+        return null
+    }
     return (
         <div className=' md:px-12 px-4 pt-10 pb-5 mb-2 border-t-2 border-black mt-6 grid lg:grid-cols-4 lg:gap-4 gap-8 font-serif grid-cols-1 md:grid-cols-2'>
            

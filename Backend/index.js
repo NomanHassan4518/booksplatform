@@ -39,7 +39,7 @@ app.post("/login", async (req, res) => {
 app.post("/addproduct", async (req, resp) => {
   let book = Book(req.body)
   let result = await book.save()
-  resp.status(200, {data:result})
+  resp.status(200).json({ data: result });
 });
 
 app.put("/book", async (req, res) => {
@@ -68,11 +68,20 @@ app.put("/book", async (req, res) => {
   }
 });
 
+// app.put("/updateAllStock", async (req, res) => {
+//   try {
+//     const newStockValue = req.body; // New stock value for all books
+//     console.log(newStockValue.stock);
 
+//   // Update the stock for all books
+//   await Book.updateMany({}, { $set: { stock: newStockValue.stock } });
 
-
-
-
+//   res.status(200).json({ message: "All stocks updated successfully" });
+// } catch (error) {
+//   console.error("Error updating stocks:", error);
+//   res.status(500).json({ error: "Internal server error" });
+// }
+// });
 
 app.get("/books", async (req, resp) => {
   let books = await Book.find(req.body);

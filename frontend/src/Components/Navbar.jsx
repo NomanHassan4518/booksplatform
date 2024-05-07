@@ -85,7 +85,7 @@ const Navbar = () => {
                                             <div className='w-[40%] h-[23rem] bg-gray-100  px-4 p-6'>
                                                 <Link to="/quran" className='text-xl font-semibold mb-2 hover:text-green-600 '>Quran Books</Link>
                                                 <div className='flex  flex-col space-y-4 ml-3 mt-4'>
-                                                    <Link to="/quranBook" className='text-lg hover:text-blue-600'>Quran Book</Link>
+                                                    <Link to="/quranBook" className='text-lg hover:text-blue-600'>Quran Mushaf</Link>
                                                     <Link to="" className='text-lg hover:text-blue-600'>About Quran</Link>
                                                     <Link to="/quranTranslation" className='text-lg hover:text-blue-600'>Quran Translations</Link>
                                                     <Link to="" className='text-lg hover:text-blue-600'>Quran Tafaseers</Link>
@@ -129,7 +129,7 @@ const Navbar = () => {
                                 </li>
                                 <li className='relative'><Link to="/allbooks" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Shop</Link></li>
                                 <li className='relative'><Link to="/" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>FAQ</Link></li>
-                                <li className='relative'><Link to="/allbooks" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Shop</Link></li>
+                               
                                 <li className='relative'><Link to="/addProduct" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Add Product</Link></li>
                             </ul>
                         </div>

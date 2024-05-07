@@ -70,7 +70,6 @@ const removeCartItem = (state, action) => {
 
 const increaseToQuantity = (state, action) => {
     const cartIndex = state.cardData.findIndex((item, index) => index === action.payload)
-    console.log(cartIndex); 
     let increase = []
     if (cartIndex > -1) {
         let quantity = state.cardData[cartIndex].quantity
