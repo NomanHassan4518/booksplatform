@@ -40,7 +40,6 @@ const cardItem = (state = initialState, action) => {
             return state;
     }
 
-
 };
 
 export default cardItem;

@@ -15,7 +15,6 @@ export const removeToCart = (index) => {
 }
 
 export const increseToQuantity = (index) => {
-    console.log(index);
     return {
         type: increseItem,
         payload: index

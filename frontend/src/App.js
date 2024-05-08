@@ -31,6 +31,7 @@ import SahihMuslim from "./Components/Hadith/SahihMuslim";
 import SunanAbuDawaod from "./Components/Hadith/SunanAbuDawaod";
 import SunanIbnMajah from "./Components/Hadith/SunanIbnMajah";
 import SunanNasai from "./Components/Hadith/SunanNasai";
+import FAQ from "./Components/FAQ";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -40,8 +41,6 @@ const App = () => {
   const message = (message) => {
     setResponse(message)
 }
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -62,9 +61,11 @@ const App = () => {
 
   localStorage.setItem('books' , JSON.stringify(data))
   let allbooks=localStorage.getItem('books')
+
   return (
     <div >
-      {loading ? <Spinner/> :  <BrowserRouter>
+      {loading ? <Spinner/> :
+        <BrowserRouter>
       <ScrollToTop/>
         <Navbar />
         <Routes>
@@ -93,6 +94,7 @@ const App = () => {
           <Route path="/children" element={<Children/>}></Route>
           <Route path="/education" element={<Education/>}></Route>
           <Route path="/sufism" element={<Sufism/>}></Route>
+          <Route path="/faq" element={<FAQ/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>}

@@ -15,7 +15,7 @@ const BookDetail = () => {
     const handleCart = () => {
         let cartItem = {
             Product: bookData,
-            quantity: quantity
+            quantity: quantity 
         };
         dispatch(addToCart(cartItem));
     };
