@@ -61,7 +61,7 @@ const Checkout = ({ responseAPI }) => {
 
     try { 
       setLoading(true)
-      let order = await axios.post("http://localhost:5000/confirmOderEmail", { userID: field._id,useremail:field.email })
+      let order = await axios.post("https://booksplatform-theta.vercel.app/confirmOderEmail", { userID: field._id,useremail:field.email })
       console.log(order);
     } finally {
       setLoading(false)

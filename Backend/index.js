@@ -120,8 +120,8 @@ app.post("/confirmOderEmail", async (req,res)=>{
   let {userID,userEmail}=req.body
 let user = await User.findOne(userID) 
 let ord = await Order.find();  
-console.log(ord[ord.length-1]._id);
 setInterval(()=>{
+  let books = ord.map((book,index)=>`${index+1}. [${book.name}]/n`)
   const mailOptions = { 
     from: 'malikhassanhu55@gmail.com', 
     to: user.email,
@@ -130,11 +130,9 @@ setInterval(()=>{
   
     Thank you for shopping with us! This email is to confirm that we have received your order and it is being processed. Below are the details of your order:
     
-    Order ID: [OrderID]
+    Order ID: [${ord[ord.length-1]._id}]
     Books Ordered:
-    [Book 1 Name]
-    [Book 2 Name]
-    [Book 3 Name]
+  ${books}
     (List all books ordered)
     Total: [Total amount]` 
   };
@@ -147,7 +145,7 @@ setInterval(()=>{
       console.log('Email sent: ' + info.response);
       res.send({ message: 'Email sent successfully' });
   }
-  },[60000]);
+  },[120000]);
 })
 })
  

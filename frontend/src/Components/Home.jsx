@@ -14,7 +14,6 @@ const Home = () => {
     let Books = JSON.parse(books)
     let bookNamesToFilter = ["Muamalat-E-Rasool SAWW", "Chengez Khan", "Global Warming", "God, Science, And Self", "2020: World of War","Kashf Ul Asrar"];
     let topBooks = Books?.filter(book => bookNamesToFilter.includes(book.name));
-    console.log(topBooks);
 
 
 
