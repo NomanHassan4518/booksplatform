@@ -24,16 +24,14 @@ const Checkout = ({ responseAPI }) => {
     note: ""
   }
   const [field, setField] = useState(formFieldName)
-  let userOrder = { userID: data._id, userName: data.name, userEmail: data.email, userPhone: field.phone, userAddress: field.address, userNote: field.note, orderedBooks: productData }
-  console.log(userOrder);
+  let userOrder = { userID: data._id, userName: field.firstName, userEmail: field.email, userPhone: field.phone, userAddress: field.address, userNote: field.note, orderedBooks: productData }
 
 
   let orderItems = productData.map((book) => ({
     bookId: book.Product._id,
     quantity: book.quantity, // Default quantity
   }))
-
-
+  console.log(loading);
 
 
   const handleOrder = async () => {
@@ -50,12 +48,20 @@ const Checkout = ({ responseAPI }) => {
     } catch (error) {
       console.error('Error placing order:', error);
     } finally {
-      setLoading(false)
+      setLoading(false) 
     }
 
     try {
       setLoading(true)
       let order = axios.post("https://booksplatform-theta.vercel.app/userOrder", userOrder)
+      console.log(order);
+    } finally {
+      setLoading(false)
+    }
+
+    try { 
+      setLoading(true)
+      let order = await axios.post("http://localhost:5000/confirmOderEmail", { userID: field._id,useremail:field.email })
       console.log(order);
     } finally {
       setLoading(false)
