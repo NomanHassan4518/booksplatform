@@ -8,6 +8,7 @@ app.use(cors());
 require("./collections/config");
 let User = require("./collections/user");
 let Book = require("./collections/book");
+let Order=require("./collections/order")
 
 app.get("/", (req, res) => {
   res.send("api is working!");
@@ -40,6 +41,11 @@ app.post("/addproduct", async (req, resp) => {
   let book = Book(req.body)
   let result = await book.save()
   resp.status(200).json({ data: result });
+});
+
+app.get("/books", async (req, resp) => {
+  let books = await Book.find(req.body);
+  resp.send(books);
 });
 
 app.put("/book", async (req, res) => {
@@ -83,10 +89,13 @@ app.put("/book", async (req, res) => {
 // }
 // });
 
-app.get("/books", async (req, resp) => {
-  let books = await Book.find(req.body);
-  resp.send(books);
-});
+
+
+app.post("/userOrder", async (req,res)=>{
+  let orders=Order(req.body)
+  let result=await orders.save();
+  res.status((200),{order:result})
+})
 
 
 
