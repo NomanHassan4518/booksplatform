@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Spinner from '../Spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { redirectDocument, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { emptyCart } from '../Redux/Action/Action';
 
@@ -9,6 +9,7 @@ const Checkout = ({ responseAPI }) => {
   const [loading, setLoading] = useState(false)
   let productData = useSelector((state) => state.cardData)
   let totalPrice = useSelector((state) => state.totalPrice)
+  const [error,setError]=useState(true)
   const [check, setCheck] = useState("cash")
   let dispatch = useDispatch()
   let navigate = useNavigate()
@@ -16,6 +17,7 @@ const Checkout = ({ responseAPI }) => {
   let person = localStorage.getItem("user")
   let data = JSON.parse(person)
 
+ 
   let formFieldName = {
     firstName: data.name,
     email: data.email,
@@ -31,55 +33,43 @@ const Checkout = ({ responseAPI }) => {
     bookId: book.Product._id,
     quantity: book.quantity, // Default quantity
   }))
-  console.log(loading);
 
 
   const handleOrder = async () => {
-    try {
-      setLoading(true)
-      const response = await axios.put(`https://booksplatform-theta.vercel.app/book`, { orderItems });
-      responseAPI(response.data)
-      dispatch(emptyCart())
-
-      if (response.data.message==='Stocks updated successfully') {
-        navigate('/')
-      }
-
-    } catch (error) {
-      console.error('Error placing order:', error);
-    } finally {
-      setLoading(false) 
-    }
-
    
-    try {
-      setLoading(true)
-      let order = axios.post("https://booksplatform-theta.vercel.app/userOrder", userOrder)
-      console.log(order);
-    } finally {
-      setLoading(false)
-    }
-
-    let orderBook={
-      name:field.firstName,
-      email:field.email,
-      books:productData,
-      total:totalPrice + shippingFee
-    }
-
-
-    try { 
-      setLoading(true)
-      let order = await axios.post("https://booksplatform-theta.vercel.app/confirmOderEmail", { orderBook})
-      console.log(order);
-    } finally {
-      setLoading(false)
-    }
-
     window.scrollTo({
       top: 0,
       behavior: 'smooth' // Smooth scrolling animation
     });
+    if(!field.firstName || !field.email || !field.phone || !field.address){
+      setError(false)
+      return false
+    } if(error===false){
+      try {
+        setLoading(true)
+        const response = await axios.put(`https://booksplatform-theta.vercel.app/book`, { orderItems });
+        responseAPI(response.data)
+        dispatch(emptyCart())
+  
+        if (response.data.message==='Stocks updated successfully') {
+          navigate('/')
+        }
+  
+      } catch (error) {
+        console.error('Error placing order:', error);
+      } finally {
+        setLoading(false) 
+      }
+  
+      try {
+        setLoading(true)
+        let order = axios.post("https://booksplatform-theta.vercel.app/userOrder", userOrder)
+        console.log(order);
+      } finally {
+        setLoading(false)
+      }
+    }
+    
   };
 
 
@@ -136,6 +126,7 @@ const Checkout = ({ responseAPI }) => {
                     }}
 
                   />
+                     {!field.firstName && !error && <p className='text-red-600'>Enter Valid Name</p>}
                 </div>
 
 
@@ -149,6 +140,7 @@ const Checkout = ({ responseAPI }) => {
                     )
 
                   }} />
+                  {!field.email && !error && <p className='text-red-600'>Enter Valid Email</p>}
                 </div>
                 <div className='col-span-12'>
                   <label htmlFor="phone" className='block text-gray-600 text-sm font-semibold mb-3'>Phone/Mobile *
@@ -161,6 +153,7 @@ const Checkout = ({ responseAPI }) => {
                     )
 
                   }} />
+                  {!field.phone && !error && <p className='text-red-600'>Enter Valid Phone No</p>}
                 </div>
               </div>
               <div className='col-span-12 mt-4'>
@@ -174,6 +167,7 @@ const Checkout = ({ responseAPI }) => {
                   )
 
                 }} />
+                {!field.address && !error && <p className='text-red-600'>Enter Valid Address</p>}
               </div>
 
               <div className="mt-8">
@@ -189,6 +183,7 @@ const Checkout = ({ responseAPI }) => {
 
                     }}
                   ></textarea>
+
                 </div>
               </div>
             </div>

@@ -103,18 +103,12 @@ app.put("/book", async (req, res) => {
 app.post("/userOrder", async (req, res) => {
   let orders = Order(req.body);
   let result = await orders.save();
-  res.status(200, { order: result });
-});
-
-app.post("/confirmOderEmail", async (req, res) => {
-  let { name, email, books, total } = req.body.orderBook;
-
   const mailOptions = {
     from: "malikhassanhu55@gmail.com",
-    to: email,
-    subject: `Order Confirmation`,
+    to: result.userEmail,
+    subject: `Order Confirmation [${result._id}]`,
     text: `
-Dear ${name},
+Dear ${result.userName},
 
 Thank you for choosing The Books Platform for your recent purchase!
 
@@ -123,11 +117,8 @@ We are writing to confirm that we have successfully received your order, and it 
 Below, you'll find the detailed list of the items you've ordered:
 
 Books Ordered:
-${books.map((book, index) => `${index + 1}. [ ${book.Product.name} ]`).join("\n")}
+${result.orderedBooks.map((book, index) => `${index + 1}. [ ${book.Product.name} ]`).join("\n")}
 
-(List all books ordered)
-
-Total Amount: ${total}
 
 If you have any questions or need further assistance regarding your order, please don't hesitate to reach out to our customer support team. We're here to help!
 
@@ -150,6 +141,13 @@ malikhassanhu55@gmail.com
       res.send({ message: "Email sent successfully" });
     }
   });
+  res.status(200, { order: result });
+});
+
+app.post("/confirmOderEmail", async (req, res) => {
+  let { name, email, books, total } = req.body.orderBook;
+
+ 
 });
 
 const PORT = process.env.PORT || 5000;

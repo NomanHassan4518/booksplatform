@@ -4,12 +4,19 @@ import { IoCloseSharp } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from './Spinner';
+import SignUp from './SignUp';
 
-const Login = ({ onClose }) => {
+const appRoot = document.getElementById('root');
+
+// Set the app element for react-modal
+Modal.setAppElement(appRoot);
+
+const Login = ({ onClose,openModel }) => {
     const [modalIsOpen, setIsOpen] = useState(true)
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [open, setOpen] = useState(false);
 
     const customStyles = {
         content: {
@@ -23,6 +30,16 @@ const Login = ({ onClose }) => {
             zIndex: "1000"
         },
     };
+
+    const handleSignUp=()=>{
+        setIsOpen(onClose)
+        setOpen(true)
+        if (open===true) {
+            setIsOpen(true)
+        }
+    }
+
+    
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -51,14 +68,14 @@ const Login = ({ onClose }) => {
       } finally{
         setLoading(false)
       }
-       
+        
     }
     return (
         <div>
             {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold fixed top-5 rounded-full p-1 right-5 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
 
             <Modal
-                isOpen={modalIsOpen}
+                isOpen={openModel}
                 onRequestClose={onClose}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -79,9 +96,11 @@ const Login = ({ onClose }) => {
 
 
                 </form>
+                <button className='w-full text-center my-3 text-xl' onClick={handleSignUp}>Don’t have an account? <span className='text-blue-600 underline'>Create Account</span></button>
             </div>
               }
             </Modal>
+            {open && <SignUp openModel={()=>{setIsOpen(true)}} onClose={()=>{setOpen(false)}}/>}
             <ToastContainer position='top-center' />
         </div>
     )

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { addToCart } from './Redux/Action/Action';
 import { useDispatch,useSelector} from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BookDetail = () => {
     let [quantity, setQuantity] = useState(1)
@@ -18,6 +19,7 @@ const BookDetail = () => {
             quantity: quantity 
         };
         dispatch(addToCart(cartItem));
+        toast.success("Book Added to Cart!")
     };
 
     return (
@@ -47,6 +49,8 @@ const BookDetail = () => {
                             </div>
                         </div>
                     </div>
+
+                    <ToastContainer position='top-center'/>
                 </div>
     )
 }

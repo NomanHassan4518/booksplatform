@@ -31,7 +31,11 @@ import SahihMuslim from "./Components/Hadith/SahihMuslim";
 import SunanAbuDawaod from "./Components/Hadith/SunanAbuDawaod";
 import SunanIbnMajah from "./Components/Hadith/SunanIbnMajah";
 import SunanNasai from "./Components/Hadith/SunanNasai";
-import FAQ from "./Components/FAQ";
+import FAQ from "./Components/Information/FAQ";
+import AboutUs from "./Components/AboutUs";
+import Privacy from "./Components/Information/Privacy";
+import Terms from "./Components/Information/Terms";
+import Return from "./Components/Information/Return";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -94,7 +98,11 @@ const App = () => {
           <Route path="/children" element={<Children/>}></Route>
           <Route path="/education" element={<Education/>}></Route>
           <Route path="/sufism" element={<Sufism/>}></Route>
+          <Route path="/about" element={<AboutUs/>}></Route>
           <Route path="/faq" element={<FAQ/>}></Route>
+          <Route path="/privacypolicy" element={<Privacy/>}></Route>
+          <Route path="/terms&conditions" element={<Terms/>}></Route>
+          <Route path="/return&refunds" element={<Return/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>}

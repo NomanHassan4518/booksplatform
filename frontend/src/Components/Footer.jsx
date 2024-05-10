@@ -34,11 +34,11 @@ const Footer = () => {
                 <h1 className='text-2xl font-bold mb-7'>Contact</h1>
                 <h1 className='flex items-center mt-6 space-x-4 text-xl'>
                     <span className='text-3xl text-pink-600'><FaMobileAlt    /></span>
-                    <Link to="/about">+923195586305</Link>
+                    <p >+923195586305</p>
                 </h1>
                 <h1 className='flex items-center mt-6 space-x-4 text-xl'>
                     <span className='text-3xl text-red-600'><MdMarkEmailUnread   /></span>
-                    <Link to="/about">thebooks@gmail.com</Link>
+                    <p >thebooks@gmail.com</p>
                 </h1>
                 
             </div>
@@ -49,19 +49,19 @@ const Footer = () => {
                 <h1 className='text-2xl font-bold mb-7'>Our Information</h1>
                 <h1 className='flex items-center mt-4 space-x-4 text-xl'>
                     <span className='text-3xl text-purple-600'><MdOutlinePrivacyTip   /></span>
-                    <Link to="/about">Privacy policy</Link>
+                    <Link to="/privacypolicy">Privacy policy</Link>
                 </h1>
                 <h1 className='flex items-center mt-6 space-x-4 text-xl'>
                     <span className='text-3xl text-lime-600'><LuFileTerminal   /></span>
-                    <Link to="/about">Terms & conditions</Link>
+                    <Link to="/terms&conditions">Terms & conditions</Link>
                 </h1>
                 <h1 className='flex items-center mt-6 space-x-4 text-xl'>
                     <span className='text-3xl text-orange-600'><GiReturnArrow    /></span>
-                    <Link to="/about">Returns & Refunds Policy</Link>
+                    <Link to="/return&refunds">Returns & Refunds Policy</Link>
                 </h1>
                 <h1 className='flex items-center mt-6 space-x-4 text-xl pb-10 md:pb-0 '>
                     <span className='text-3xl text-red-600  '><FaQuestion     /></span>
-                    <Link to="/about">FAQ & Help</Link>
+                    <Link to="/faq">FAQ & Help</Link>
                 </h1>
             </div>
         </div>

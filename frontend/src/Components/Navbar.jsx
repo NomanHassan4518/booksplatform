@@ -177,10 +177,10 @@ const Navbar = () => {
             </div>
 
             {
-                openSignup && <SignUp onClose={() => { setopenSignUp(false) }} />
+                openSignup && <SignUp openModel={{open:true}} onClose={() => { setopenSignUp(false) }} />
             }
             {
-                openLogin && <Login onClose={() => { setOpenLogin(false) }} />
+                openLogin &&  <Login openModel={()=>{setOpenLogin(true)}} onClose={() => { setOpenLogin(false) }} />
             }
             <Drawer
                 title={title}
