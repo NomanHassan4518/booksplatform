@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
 let cors = require("cors");
-const nodemailer = require('nodemailer');
-
+const nodemailer = require("nodemailer");
 
 app.use(express.json());
 app.use(cors());
@@ -10,21 +9,17 @@ app.use(cors());
 require("./collections/config");
 let User = require("./collections/user");
 let Book = require("./collections/book");
-let Order=require("./collections/order")
+let Order = require("./collections/order");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  service: 'Gmail',
+  service: "Gmail",
   auth: {
-      user: 'malikhassanhu55@gmail.com',
-      pass: 'fgzv tqqz twpm rlwq'
-  }
+    user: "malikhassanhu55@gmail.com",
+    pass: "fgzv tqqz twpm rlwq",
+  },
 });
-
-
-
-
 
 app.get("/", (req, res) => {
   res.send("api is working!");
@@ -44,21 +39,18 @@ app.post("/login", async (req, res) => {
     if (user) {
       res.send(user);
     } else {
-      res.status(401).json({error:"user not found"});
+      res.status(401).json({ error: "user not found" });
     }
   } else {
     res.send("User not found!");
-
-    
   }
 });
 
 app.post("/addproduct", async (req, resp) => {
-  let book = Book(req.body)
-  let result = await book.save()
+  let book = Book(req.body);
+  let result = await book.save();
   resp.status(200).json({ data: result });
 });
-
 
 app.get("/books", async (req, resp) => {
   let books = await Book.find(req.body);
@@ -76,7 +68,9 @@ app.put("/book", async (req, res) => {
       let book = await Book.findById(bookId);
 
       if (!book) {
-        return res.status(404).json({ error: `Book with ID ${bookId} not found` });
+        return res
+          .status(404)
+          .json({ error: `Book with ID ${bookId} not found` });
       }
 
       // Update the stock
@@ -106,53 +100,59 @@ app.put("/book", async (req, res) => {
 // }
 // });
 
+app.post("/userOrder", async (req, res) => {
+  let orders = Order(req.body);
+  let result = await orders.save();
+  res.status(200, { order: result });
+});
 
+app.post("/confirmOderEmail", async (req, res) => {
+  let { name, email, books, total } = req.body.orderBook;
 
-app.post("/userOrder", async (req,res)=>{
-  let orders=Order(req.body)
-  let result=await orders.save();
-  res.status((200),{order:result})
-})
+  const mailOptions = {
+    from: "malikhassanhu55@gmail.com",
+    to: email,
+    subject: `Order Confirmation`,
+    text: `
+Dear ${name},
 
+Thank you for choosing The Books Platform for your recent purchase!
 
+We are writing to confirm that we have successfully received your order, and it is currently being processed with the utmost care and attention to detail.
 
-app.post("/confirmOderEmail", async (req,res)=>{
-  let {userID,userEmail}=req.body
-let user = await User.findOne(userID) 
-let ord = await Order.find();  
-setInterval(()=>{
-  let books = ord.map((book,index)=>`${index+1}. [${book.name}]/n`)
-  const mailOptions = { 
-    from: 'malikhassanhu55@gmail.com', 
-    to: user.email,
-    subject: `Order Confirmation for [${ord[ord.length-1]._id}]`, 
-    text: `Dear ${user.name},
-  
-    Thank you for shopping with us! This email is to confirm that we have received your order and it is being processed. Below are the details of your order:
-    
-    Order ID: [${ord[ord.length-1]._id}]
-    Books Ordered:
-  ${books}
-    (List all books ordered)
-    Total: [Total amount]` 
+Below, you'll find the detailed list of the items you've ordered:
+
+Books Ordered:
+${books.map((book, index) => `${index + 1}. [ ${book.Product.name} ]`).join("\n")}
+
+(List all books ordered)
+
+Total Amount: ${total}
+
+If you have any questions or need further assistance regarding your order, please don't hesitate to reach out to our customer support team. We're here to help!
+
+Once again, thank you for your purchase. We truly appreciate your business.
+
+Best regards,
+Noman Hassan
+The Books Platform
+malikhassanhu55@gmail.com
+
+    `,
   };
-  
-  transporter.sendMail(mailOptions, function(error, info){
+
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
-      res.status(500).send({ error: 'Error sending email' });
-  } else {
-      console.log('Email sent: ' + info.response);
-      res.send({ message: 'Email sent successfully' });
-  }
-  },[120000]);
-})
-})
- 
-
+      res.status(500).send({ error: "Error sending email" });
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send({ message: "Email sent successfully" });
+    }
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-

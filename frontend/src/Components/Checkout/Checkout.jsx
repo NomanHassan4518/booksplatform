@@ -51,6 +51,7 @@ const Checkout = ({ responseAPI }) => {
       setLoading(false) 
     }
 
+   
     try {
       setLoading(true)
       let order = axios.post("https://booksplatform-theta.vercel.app/userOrder", userOrder)
@@ -59,9 +60,17 @@ const Checkout = ({ responseAPI }) => {
       setLoading(false)
     }
 
+    let orderBook={
+      name:field.firstName,
+      email:field.email,
+      books:productData,
+      total:totalPrice + shippingFee
+    }
+
+
     try { 
       setLoading(true)
-      let order = await axios.post("https://booksplatform-theta.vercel.app/confirmOderEmail", { userID: field._id,useremail:field.email })
+      let order = await axios.post("https://booksplatform-theta.vercel.app/confirmOderEmail", { orderBook})
       console.log(order);
     } finally {
       setLoading(false)
