@@ -2,12 +2,12 @@ import React from 'react'
 
 const Return = () => {
     return (
-        <div className='p-20'>
+        <div className='lg:p-20 py-20 px-6 '>
             <div>
-                <h1 className='text-7xl relative after:absolute after:left-[39%] after:right-[50%] after:top-[7rem]  font-extrabold text-center after:w-[20%] after:h-[4px] after:bg-[#ffe600] '>Reuturn & Refund Policy</h1>
+                <h1 className='lg::text-7xl md:text-6xl text-3xl relative after:absolute after:left-[39%] after:right-[50%] lg::after:top-[7rem] md:after:top-[8.5rem] after:top-[4.9rem]  font-extrabold text-center after:w-[20%] after:h-[4px] after:bg-[#ffe600] '>Reuturn & Refund Policy</h1>
             </div>
 
-            <div className="mt-32  text-[#777] ">
+            <div className="md:mt-32 mt-20  text-[#777] ">
                 <p className='text-lg'>Greetings! Thank you for choosing us for your purchase. Your satisfaction is our priority and we hope you are happy with your purchase. We take strict measures to ensure that customers get what they ordered. However, if you are not satisfied with your purchase, you may return it to us for an exchange or a refund via store credits/voucher.</p>
 
                 <div className="mt-10 text-lg">

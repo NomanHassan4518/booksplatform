@@ -5,11 +5,11 @@ const AboutUs = () => {
     const [vision, setVision] = useState('hidden')
     return (
         <div >
-            <div className='w-full h-[13rem] flex items-center bg-[#122772] text-white justify-center '>
-                <h1 className='text-7xl font-extrabold'>The Books Platform</h1>
+            <div className='w-full md:h-[13rem] h-[9rem] flex items-center bg-[#122772] text-white justify-center '>
+                <h1 className='lg:text-7xl md:text-6xl text-3xl font-extrabold'>The Books Platform</h1>
             </div>
 
-            <div className="mt-12 px-24">
+            <div className="mt-12 lg:px-24 px-4">
                 <div className="flex items-center justify-center space-x-12 pb-6 border-b-2 text-xl">
                     <button className={`${about === 'block' ? 'text-[#091290] after:w-full' : 'text-black'} relative font-semibold after:w-0 after:h-[2px] after:bg-[#ffe600] after:top-[3.2rem] after:absolute after:content-[&quot;&quot;] ease-in-out after:duration-500 after:left-0 `} onClick={() => { setVision('hidden'); setAbout('block') }}>About</button>
                     <button className={`${vision === 'block' ? 'text-[#122772] after:w-full' : 'text-black'} relative font-semibold after:w-0 after:h-[2px] after:bg-[#ffe600] after:top-[3.2rem] after:absolute after:content-[&quot;&quot;] ease-in-out after:duration-500 after:left-0`} onClick={() => { setAbout('hidden'); setVision('block') }}>VISION & MISSION</button>

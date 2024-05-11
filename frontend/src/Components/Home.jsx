@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import img from '../data/download (2).png'
 import HomeTopSlider from './HomeTopSlider';
 
 
@@ -18,7 +17,7 @@ const Home = () => {
 
 
     return (
-        <div className='w-full border '>
+        <div className='w-full  '>
             <div className="px-4">
                 <HomeTopSlider />
             </div>
@@ -69,25 +68,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className='md:px-5 px-3 py-12 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:space-y-0  gap-10   border-t-2 mt-12 border-black'>
-                <div className='  flex items-center justify-center flex-col'>
-                    <img className='w-[60px] pb-3' src="https://thebooksplatforms.com/wp-content/uploads/2018/12/globe-free-img.png" alt="" />
-                    <p className='text-xl font-semibold'>Shipping arround Pakistan</p>
-                </div>
-                <div className='  flex items-center justify-center flex-col'>
-                    <img className='w-[60px] pb-3' src={img} alt="" />
-                    <p className='text-xl font-semibold'>Best Quality</p>
-                </div>
-                <div className='  flex items-center justify-center flex-col'>
-                    <img className='w-[60px] pb-3' src="https://thebooksplatforms.com/wp-content/uploads/2018/12/tag-free-img.png" alt="" />
-                    <p className='text-xl font-semibold'>Best Offers</p>
-                </div>
-                <div className='  flex items-center justify-center flex-col'>
-                    <img className='w-[60px] pb-3' src="https://thebooksplatforms.com/wp-content/uploads/2018/12/lock-free-img.png" alt="" />
-                    <p className='text-xl font-semibold'>Secure Payments</p>
-                </div>
-
-            </div>
+         
 
         </div>
     )

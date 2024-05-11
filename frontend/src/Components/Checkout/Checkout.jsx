@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Spinner from '../Spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { redirectDocument, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { emptyCart } from '../Redux/Action/Action';
 
@@ -44,7 +44,8 @@ const Checkout = ({ responseAPI }) => {
     if(!field.firstName || !field.email || !field.phone || !field.address){
       setError(false)
       return false
-    } if(error===false){
+    } 
+   else if(error===false){
       try {
         setLoading(true)
         const response = await axios.put(`https://booksplatform-theta.vercel.app/book`, { orderItems });
@@ -73,20 +74,20 @@ const Checkout = ({ responseAPI }) => {
   };
 
 
-  let paymentMethod = [
-    {
-      type: "Stripe",
-      url: "https://apna.ignitehq.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fsrc%2Fcomponents%2Fassets%2FcardImg.7a524e7eee46cdc62481e3df275c3db7.jpg&w=828&q=75"
-    },
-    {
-      type: "Tap",
-      url: "https://apna.ignitehq.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fsrc%2Fcomponents%2Fassets%2FcardImg.7a524e7eee46cdc62481e3df275c3db7.jpg&w=828&q=75"
-    }
-  ]
+  // let paymentMethod = [
+  //   {
+  //     type: "Stripe",
+  //     url: "https://apna.ignitehq.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fsrc%2Fcomponents%2Fassets%2FcardImg.7a524e7eee46cdc62481e3df275c3db7.jpg&w=828&q=75"
+  //   },
+  //   {
+  //     type: "Tap",
+  //     url: "https://apna.ignitehq.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fsrc%2Fcomponents%2Fassets%2FcardImg.7a524e7eee46cdc62481e3df275c3db7.jpg&w=828&q=75"
+  //   }
+  // ]
 
-  const payment = (item) => {
-    setCheck(item)
-  }
+  // const payment = (item) => {
+  //   setCheck(item)
+  // }
 
   const cash = () => {
     setCheck("cash")
@@ -104,7 +105,7 @@ const Checkout = ({ responseAPI }) => {
 
 
   return (
-    loading ? <Spinner /> : <div className='lg:px-14 px-4 py-12 w-full mx-auto md:grid md:grid-cols-12 sm:flex sm:flex-col'>
+    loading ? <Spinner /> : <div className='lg:px-14 px-4 lg:py-12 w-full mx-auto lg:grid md:grid-cols-12 md:flex md:flex-col'>
       <div className='md:col-span-7'>
         <div className='md:px-4'>
           <div className='flex flex-col w-full '>
@@ -191,20 +192,21 @@ const Checkout = ({ responseAPI }) => {
           </div>
         </div>
       </div>
+
       <div className="md:col-span-5 ">
         <div className='mt-6 lg:ml-12 '>
           <h1 className='text-2xl font-bold mb-6'>Your Order</h1>
 
           <div className="mt-3 flex justify-between   items-center font-semibold px-3 bg-gray-300 rounded-md h-12">
             <p>Product</p>
-            <p>Subtotal</p>
+            <p>Price</p>
           </div>
 
           <div className="mt-3">
             {
               productData.map((Item, index) => (
-                <div className='flex justify-between items-center mt-8  border-b border-gray-200'>
-                  <div className="flex w-[70%] items-center">
+                <div className='flex justify-between items-center mt-8 pb-3  border-b border-gray-200'>
+                  <div className="flex w-[70%] space-x-2 items-center">
                     <div className='w-20 h-17'>
                       <img src={Item.Product.img} alt="" />
                     </div>
@@ -230,7 +232,7 @@ const Checkout = ({ responseAPI }) => {
                 checked={check === "cash"} />
               <p>Cash on Pickup</p>
             </div>
-            {
+            {/* {
               paymentMethod.map((item) => (
                 <div className='mt-4 border-2 border-gray-200 hover:bg-gray-200 flex items-center rounded-md' onClick={() => payment(item.type)}>
                   <input type="radio"
@@ -246,7 +248,7 @@ const Checkout = ({ responseAPI }) => {
                 </div>
 
               ))
-            }
+            } */}
           </div>
 
           <div className="mt-4">
@@ -268,7 +270,7 @@ const Checkout = ({ responseAPI }) => {
 
           </div>
 
-          <div className='w-full mt-3'>
+          <div className='w-full mt-3 pb-20 lg:pb-0'>
             <button className='w-full  bg-green-700 text-white py-3 rounded-md font-semibold' onClick={handleOrder}>Place Order</button>
           </div>
         </div>

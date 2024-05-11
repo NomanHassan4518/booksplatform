@@ -1,6 +1,6 @@
 import "./App.css";
 import AllBooks from "./Components/AllBooks";
-import Footer from "./Components/Footer";
+import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Spinner from './Components/Spinner'
@@ -14,28 +14,28 @@ import BookDetail from "./Components/BookDetail";
 import Quran from "./Components/Quran/Quran";
 import QuranBook from "./Components/Quran/QuranBook";
 import QuranTranslation from "./Components/Quran/QuranTranslation";
-import Political from "./Components/OtherBooks/Political";
-import OtherBooks from "./Components/OtherBooks/OtherBooks";
-import History from "./Components/OtherBooks/History";
-import Novels from "./Components/OtherBooks/Novels";
-import Iqbaliyat from "./Components/OtherBooks/Iqbaliyat";
-import Biography from "./Components/OtherBooks/Biography";
-import Education from "./Components/OtherBooks/Education";
-import Children from "./Components/OtherBooks/Children";
+import Political from "./Components/Collection/Political";
+import OtherBooks from "./Components/Collection/OtherBooks";
+import History from "./Components/Collection/History";
+import Novels from "./Components/Collection/Novels";
+import Iqbaliyat from "./Components/Collection/Iqbaliyat";
+import Biography from "./Components/Collection/Biography";
+import Education from "./Components/Collection/Education";
+import Children from "./Components/Collection/Children";
 import AboutQuran from "./Components/Quran/AboutQuran";
 import QuranTafaseers from "./Components/Quran/QuranTafaseers";
-import Sufism from "./Components/OtherBooks/Sufism";
+import Sufism from "./Components/Collection/Sufism";
 import Hadith from "./Components/Hadith/Hadith";
 import SahihBukhari from "./Components/Hadith/SahihBukhari";
 import SahihMuslim from "./Components/Hadith/SahihMuslim";
 import SunanAbuDawaod from "./Components/Hadith/SunanAbuDawaod";
 import SunanIbnMajah from "./Components/Hadith/SunanIbnMajah";
 import SunanNasai from "./Components/Hadith/SunanNasai";
-import FAQ from "./Components/Information/FAQ";
-import AboutUs from "./Components/AboutUs";
-import Privacy from "./Components/Information/Privacy";
-import Terms from "./Components/Information/Terms";
-import Return from "./Components/Information/Return";
+import FAQ from "./Components/Footer/FAQ";
+import AboutUs from "./Components/Footer/AboutUs";
+import Privacy from "./Components/Footer/Privacy";
+import Terms from "./Components/Footer/Terms";
+import Return from "./Components/Footer/Return";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -67,7 +67,7 @@ const App = () => {
   let allbooks=localStorage.getItem('books')
 
   return (
-    <div >
+    <div className="cursor-default">
       {loading ? <Spinner/> :
         <BrowserRouter>
       <ScrollToTop/>

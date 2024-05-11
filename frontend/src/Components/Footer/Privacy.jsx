@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Privacy = () => {
   return (
-    <div className='p-20'>
+    <div className='lg:p-20 py-20 px-4'>
       <div>
-        <h1 className='text-7xl relative after:absolute after:left-[39%] after:right-[50%] after:top-[7rem]  font-extrabold text-center after:w-[20%] after:h-[4px] after:bg-[#ffe600] '>Privacy Policy</h1>
+        <h1 className='md:text-7xl text-4xl relative after:absolute after:left-[39%] after:right-[50%] md:after:top-[7rem] after:top-[3.4rem]  font-extrabold text-center after:w-[20%] after:h-[4px] after:bg-[#ffe600] '>Privacy Policy</h1>
         <p className='mt-20 text-center text-xl font-semibold '>Welcome to our Privacy Policy <br />
           Your privacy is critically important to us!</p>
       </div>

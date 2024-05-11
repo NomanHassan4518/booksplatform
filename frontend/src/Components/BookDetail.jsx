@@ -29,7 +29,7 @@ const BookDetail = () => {
                     </div>
 
                     <div className='lg:px-4 lg:w-[80%] mt-5 lg:mt-0 '>
-                        <p className='text-4xl font-bold mb-4 text-green-600'>{bookData.name}</p>
+                        <p className='md:text-4xl text-xl font-bold mb-4 text-green-600'>{bookData.name}</p>
                         <p className='text-xl  leading-8'>{bookData.desc} <br /> We deal in all kinds of Islamic, Iqbaliyat, and other Urdu reading books. Now you can order Urdu Books from <b>The Books PlatForm</b> and get them delivered to your doorstep all over Pakistan within 3 working days. Order Now.</p>
                         <p className='mt-5 text-2xl font-bold text-blue-600'><span className='text-red-600'>Price:</span> RS {bookData.price}</p>
 
@@ -44,8 +44,8 @@ const BookDetail = () => {
                                 <div className='w-full bg-black h-12 flex items-center justify-center rounded text-xl font-bold text-yellow-400 cursor-default'>{bookData.stock>=1 && bookData.stock!==cartData[bookIndex]?.quantity? "Stock In" :"Stock Out"}</div>
                             </div>
 
-                            <div className='mt-4'>
-                                <button disabled={bookData.stock<=0 || bookData.stock===cartData[bookIndex]?.quantity || quantity>bookData.stock-cartData[bookIndex]?.quantity } className={`w-full  rounded ${bookData.stock===0 || bookData.stock===cartData[bookIndex]?.quantity || quantity>bookData.stock-cartData[bookIndex]?.quantity?"cursor-not-allowed bg-red-600 text-white ":"cursor-pointer text-orange-500 bg-black"} h-12 uppercase  font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
+                            <div className='mt-4 pb-20 md:pb-0'>
+                                <button disabled={bookData.stock<=0 || bookData.stock===cartData[bookIndex]?.quantity || quantity>bookData.stock-cartData[bookIndex]?.quantity } className={`w-full  rounded ${bookData.stock===0 || bookData.stock===cartData[bookIndex]?.quantity || quantity>bookData.stock-cartData[bookIndex]?.quantity?"cursor-not-allowed bg-red-700 text-white ":"cursor-pointer text-orange-500 bg-black"} h-12 uppercase  font-semibold text-xl`} onClick={handleCart}>Add to cart</button>
                             </div>
                         </div>
                     </div>

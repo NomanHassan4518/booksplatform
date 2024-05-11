@@ -15,7 +15,7 @@ const SunanIbnMajah = () => {
     <div className='md:px-4 px-2 md:mt-12  mt-4 pb-12'>
     <div className='border md:p-5 p-2 rounded shadow '>
         <div className="flex items-center justify-between p-3">
-            <h1 className='text-2xl font-bold uppercase '>Sunan Ibn Majah</h1>
+            <h1 className='md:text-2xl text-xl font-bold uppercase '>Sunan Ibn Majah</h1>
             <p className='text-lg text-gray-500'>{ibnMajah?.length} books</p>
         </div>
 

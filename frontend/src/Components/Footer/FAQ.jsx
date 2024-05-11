@@ -51,12 +51,12 @@ const FAQ = () => {
   return (
     <>
       <div class="py-4 lg:py-0 mb-8">
-      <div className='w-full h-[13rem] py-10 px-20  bg-[#122772] text-white  '>
-                <h1 className='text-7xl font-extrabold'>FAQ</h1>
-                <p className='mt-7 text-xl font-semibold'>Frequently Asked Questions</p>
+      <div className='w-full md:h-[13rem] h-[9rem] py-10 md:px-20 px-6  bg-[#122772] text-white  '>
+                <h1 className='md:text-7xl text-4xl font-extrabold'>FAQ</h1>
+                <p className='md:mt-7 mt-4 text-xl font-semibold'>Frequently Asked Questions</p>
             </div>
         <div className=' text-[#777] text-xl '>
-          <div className=' px-20 py-10 '>
+          <div className=' lg:px-20 px-6 py-10 '>
             <p className='text-lg leading-9'>
               Welcome to The Books Platform, your premier online destination for discovering and acquiring the finest literary treasures! At The Books Platform, we curate a vast selection of books spanning every genre imaginable, meticulously handpicked to satisfy the discerning tastes of book enthusiasts worldwide.
 
@@ -67,7 +67,7 @@ const FAQ = () => {
         </div>
       </div>
 
-      <div className="my-12 px-20">
+      <div className="my-12 lg:px-20 px-6 text-center">
         
         <div className='pb-5  border-b mb-8'>
           <div className="flex items-center justify-between cursor-pointer" onClick={handleAnswer}>
