@@ -32,7 +32,7 @@ const Home = () => {
                     <div className="grid 2xl:grid-cols-4  lg:grid-cols-2 grid-cols-1 gap-8 mt-10 pb-6">
                         {
                             topBooks?.map((book) => (
-                                <div key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 shadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
+                                <div key={book.id} className='md:flex md:items-center md:space-x-5 bg-gray-100 boxShadow rounded p-4  group cursor-pointer' onClick={() => handleBook(book)}>
                                     <div className='md:w-[250px] md:h-[183px] w-[100%] h-[250px] '>
                                         <img className='w-full h-full md:object-contain object-fill group-hover:scale-105 transition-transform ease-in-out duration-500' src={book.img} alt="" />
                                     </div>

@@ -133,7 +133,7 @@ const Checkout = ({ responseAPI }) => {
 
                 <div className='col-span-6'>
                   <label htmlFor="email" className='block text-gray-600 text-sm font-semibold mb-3'>Email *</label>
-                  <input type="email" id='email' name='email' value={field.email} className='border-[1px] border-gray-200 rounded-md w-full px-4 py-2 focus:ring-black focus:border-none focus:ring-[1px]' onChange={(e) => {
+                  <input type="email" id='email' name='email' value={field.email} className='border-[1px] border-gray-200  rounded-md w-full px-4 py-2 focus:ring-black focus:border-none focus:ring-[1px]' onChange={(e) => {
                     setField({
                       ...field,
                       email: e.target.value
@@ -173,8 +173,8 @@ const Checkout = ({ responseAPI }) => {
 
               <div className="mt-8">
                 <div>
-                  <label for="message" class="block mb-2 text-sm font-medium text-black dark:text-white">Order Notes (Optional)</label>
-                  <textarea id="message" value={field.note} rows="4" class="block p-2.5 w-full text-sm border-[1px] text-gray-900 bg-white rounded-lg  border-gray-300 focus:ring-gray-700 focus:border-gray-700 dark:bg-white dark:border-gray-700 dark:placeholder-white dark:text-white dark:focus:ring-black dark:focus:border-black" placeholder="Notes about your order, e.g. special notes for delivery"
+                  <label for="message" class="block mb-2 text-sm font-medium text-black ">Order Notes (Optional)</label>
+                  <textarea id="message" value={field.note} rows="4" class="block p-2.5 w-full text-sm border-[1px] text-gray-900 bg-white rounded-lg  border-gray-300 focus:ring-gray-700  focus:border-gray-700 " placeholder="Notes about your order, e.g. special notes for delivery"
                     onChange={(e) => {
                       setField({
                         ...field,

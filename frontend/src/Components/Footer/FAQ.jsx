@@ -50,7 +50,7 @@ const FAQ = () => {
   }
   return (
     <>
-      <div class="py-4 lg:py-0 mb-8">
+      <div class=" mb-8">
       <div className='w-full md:h-[13rem] h-[9rem] py-10 md:px-20 px-6  bg-[#122772] text-white  '>
                 <h1 className='md:text-7xl text-4xl font-extrabold'>FAQ</h1>
                 <p className='md:mt-7 mt-4 text-xl font-semibold'>Frequently Asked Questions</p>

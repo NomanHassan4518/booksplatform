@@ -1,5 +1,4 @@
 import React from 'react'
-import { IoShuffle } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
 const AllBooks = (props) => {
@@ -23,7 +22,7 @@ const AllBooks = (props) => {
         <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-12 gap-10  mt-3 pb-6">
             {
                 books?.map((book) => (
-                <div className='shadow-lg border border-gray-700 lg:hover:scale-105 duration-500 ease-in-out bg-gray-200  rounded-lg cursor-pointer' onClick={() => handleBook(book)}>
+                <div className='boxShadow border border-gray-700 lg:hover:scale-105 duration-500 ease-in-out bg-gray-200  rounded-lg cursor-pointer' onClick={() => handleBook(book)}>
                     <div className='w-full 2xl:h-[430px] h-[250px]  bg-white border-b border-black rounded-t-lg '>
                         <img src={book.img} className='w-full h-full rounded-t-lg object-contain ' alt="" />
                     </div> 

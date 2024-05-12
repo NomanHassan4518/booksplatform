@@ -58,7 +58,7 @@ const Footer = () => {
         <p >+923195586305</p>
     </h1>
     <h1 className='flex items-center mt-6 space-x-4 text-xl'>
-        <span className='text-3xl text-green-900'><FaSquareWhatsapp  /></span>
+        <span className='text-3xl text-green-600'><FaSquareWhatsapp  /></span>
         <p >+923005274906</p>
     </h1>
     <h1 className='flex items-center mt-6 space-x-4 text-xl'>
