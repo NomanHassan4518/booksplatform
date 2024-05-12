@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { IoCloseSharp } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 
 const appRoot = document.getElementById('root');
 

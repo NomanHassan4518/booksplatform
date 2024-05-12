@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import SignUp from './SignUp'
-import Login from './Login'
+import SignUp from './Account/SignUp'
+import Login from './Account/Login'
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineClose } from 'react-icons/ai'
 import { Drawer } from 'antd';
