@@ -21,10 +21,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-app.get("/", (req, res) => {
-  res.send("api is working!");
-});
-
 app.post("/signup", async (req, res) => {
   let user = User(req.body);
   let result = await user.save();
@@ -42,7 +38,7 @@ app.post("/login", async (req, res) => {
       res.status(401).json({ error: "user not found" });
     }
   } else {
-    res.send("User not found!");
+    res.status(401).json({ error: "user not found" });
   }
 });
 
@@ -52,12 +48,12 @@ app.post("/addproduct", async (req, resp) => {
   resp.status(200).json({ data: result });
 });
 
-app.get("/books", async (req, resp) => {
+app.get("/allBooks", async (req, resp) => {
   let books = await Book.find(req.body);
   resp.send(books);
 });
 
-app.put("/book", async (req, res) => {
+app.put("/updateStock", async (req, res) => {
   try {
     const updates = req.body; // Array of book updates [{ bookId, quantity }, ...]
     // Loop through each update
@@ -85,21 +81,6 @@ app.put("/book", async (req, res) => {
   }
 });
 
-// app.put("/updateAllStock", async (req, res) => {
-//   try {
-//     const newStockValue = req.body; // New stock value for all books
-//     console.log(newStockValue.stock);
-
-//   // Update the stock for all books
-//   await Book.updateMany({}, { $set: { stock: newStockValue.stock } });
-
-//   res.status(200).json({ message: "All stocks updated successfully" });
-// } catch (error) {
-//   console.error("Error updating stocks:", error);
-//   res.status(500).json({ error: "Internal server error" });
-// }
-// });
-
 app.post("/userOrder", async (req, res) => {
   let orders = Order(req.body);
   let result = await orders.save();
@@ -117,7 +98,9 @@ We are writing to confirm that we have successfully received your order, and it 
 Below, you'll find the detailed list of the items you've ordered:
 
 Books Ordered:
-${result.orderedBooks.map((book, index) => `${index + 1}. [ ${book.Product.name} ]`).join("\n")}
+${result.orderedBooks
+  .map((book, index) => `${index + 1}. [ ${book.Product.name} ]`)
+  .join("\n")}
 
 
 If you have any questions or need further assistance regarding your order, please don't hesitate to reach out to our customer support team. We're here to help!
@@ -144,11 +127,7 @@ malikhassanhu55@gmail.com
   res.status(200, { order: result });
 });
 
-app.post("/confirmOderEmail", async (req, res) => {
-  let { name, email, books, total } = req.body.orderBook;
 
- 
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

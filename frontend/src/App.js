@@ -50,7 +50,7 @@ const App = () => {
       try {
         setLoading(true);
   
-        const response = await axios.get('https://booksplatform-theta.vercel.app/books');
+        const response = await axios.get('https://booksplatform-theta.vercel.app/allBooks');
         const mybooks = response.data;
         setData(mybooks);
         
