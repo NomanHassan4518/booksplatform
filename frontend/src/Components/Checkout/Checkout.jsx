@@ -94,11 +94,8 @@ const Checkout = ({ responseAPI }) => {
   }
 
 
-  let shippingFee = 0
+  let shippingFee = 250;
 
-  productData.map((item => {
-    return shippingFee += item.quantity * 30
-  }))
 
 
 

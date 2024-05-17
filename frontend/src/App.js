@@ -15,7 +15,7 @@ import Quran from "./Components/Quran/Quran";
 import QuranBook from "./Components/Quran/QuranBook";
 import QuranTranslation from "./Components/Quran/QuranTranslation";
 import Political from "./Components/Collection/Political";
-import OtherBooks from "./Components/Collection/OtherBooks";
+import Collection from "./Components/Collection/Collection";
 import History from "./Components/Collection/History";
 import Novels from "./Components/Collection/Novels";
 import Iqbaliyat from "./Components/Collection/Iqbaliyat";
@@ -89,7 +89,7 @@ const App = () => {
           <Route path="/sunanAbuDawood" element={<SunanAbuDawaod/>}></Route>
           <Route path="/sunanIbnMajah" element={<SunanIbnMajah/>}></Route>
           <Route path="/sunanNasai" element={<SunanNasai/>}></Route>
-          <Route path="/otherBooks" element={<OtherBooks/>}></Route>
+          <Route path="/collection" element={<Collection/>}></Route>
           <Route path="/political" element={<Political/>}></Route>
           <Route path="/history" element={<History/>}></Route>
           <Route path="/novels" element={<Novels/>}></Route>

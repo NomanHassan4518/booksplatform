@@ -52,7 +52,7 @@ const SignUp = ({ onClose, openModel} ) => {
     }
     return (
         <div>
-            {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold fixed top-5 rounded-full p-1 right-5 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
+            {modalIsOpen && <button onClick={onClose} className='text-2xl font-bold fixed lg:top-5 top-2 rounded-full p-1 lg:right-5 right-2 bg-white z-[1000000000000000000000]'><IoCloseSharp /></button>}
 
             <Modal
                 isOpen={openModel.open}
@@ -63,15 +63,15 @@ const SignUp = ({ onClose, openModel} ) => {
                 className='model'
             >
                 {loading ? <Spinner height="h-full" /> :
-                    <div >
+                    <div className='py-5'>
                         <h1 className='pt-5 pb-3 text-4xl font-bold font-serif text-center'>SignUp Now</h1>
                         <p className='text-center  text-gray-500'>Please fill in this form to signup.</p>
-                        <form className='flex items-center flex-col space-y-5 py-5'>
-                            <input type='text' value={name} onChange={(e) => { setName(e.target.value) }} placeholder='Enter Your Name' className='border-2 border-black rounded py-1 px-4 md:w-[60%] w-[90%] focus:outline-none bg-gray-200' />
+                        <form className='flex items-center flex-col space-y-8 py-5'>
+                            <input type='text' value={name} onChange={(e) => { setName(e.target.value) }} placeholder='Enter Your Name' className='border-2 border-black rounded py-2 px-4 md:w-[70%] w-[90%] focus:outline-none bg-gray-100' />
                             <input type='email' value={email} onChange={(e) => {
                                 setEmail(e.target.value)
-                            }} placeholder='Enter Your Email' className='border-2 border-black rounded py-1 px-4 md:w-[60%] w-[90%] focus:outline-none bg-gray-200' />
-                            <input type='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter Your Password' className='border-2 border-black rounded py-1 px-4 md:w-[60%] w-[90%] focus:outline-none bg-gray-200' />
+                            }} placeholder='Enter Your Email' className='border-2 border-black rounded py-2 px-4 md:w-[70%] w-[90%] focus:outline-none bg-gray-100' />
+                            <input type='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter Your Password' className='border-2 border-black rounded py-2 px-4 md:w-[70%] w-[90%] focus:outline-none bg-gray-100' />
                             <button className='bg-blue-600 text-white font-semibold py-2 px-4 rounded w-40 hover:bg-purple-700' onClick={handleSignup}>SignUp</button>
                         </form>
                         

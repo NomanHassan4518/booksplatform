@@ -15,7 +15,7 @@ const Footer = () => {
     }
     return (
         <>
-        <div className=' md:px-12 px-4 pt-10 pb-5 w-full  border-t-2 border-black mt-6 grid lg:grid-cols-4 lg:gap-4 gap-8 font-serif grid-cols-1 md:grid-cols-2'>
+        <div className=' md:px-12 px-4 pt-10 pb-5 w-full bg-gray-100  mt-6 grid lg:grid-cols-4 lg:gap-4 gap-8 font-serif grid-cols-1 md:grid-cols-2'>
 
 <div>
     <h1 className='text-xl font-bold mb-7 uppercase '>Categories</h1>
@@ -87,7 +87,7 @@ const Footer = () => {
 
 
 </div>
-<div className='w-full md:h-[3rem] h-[4rem] mb-16 md:mb-0 text-center bg-lime-200 font-semibold text-black flex items-center justify-center '>© 2024 The Books Platform. All rights reserved</div>
+<div className='w-full md:h-[3rem] h-[4rem] mb-16 md:mb-0 text-center border-t-2 border-black bg-gray-200 font-semibold text-black flex items-center justify-center '>© 2024 The Books Platform. All rights reserved</div>
         </>
     )
 }

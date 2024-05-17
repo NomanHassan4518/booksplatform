@@ -50,7 +50,7 @@ const BookDetail = () => {
                         </div>
                     </div>
 
-                    <ToastContainer position='top-center'/>
+                    <ToastContainer position='top-right'/>
                 </div>
     )
 }

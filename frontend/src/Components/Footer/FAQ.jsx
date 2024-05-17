@@ -67,7 +67,7 @@ const FAQ = () => {
         </div>
       </div>
 
-      <div className="my-12 lg:px-20 px-6 text-center">
+      <div className="my-12 lg:px-20 px-6 text-center lg:text-start ">
         
         <div className='pb-5  border-b mb-8'>
           <div className="flex items-center justify-between cursor-pointer" onClick={handleAnswer}>

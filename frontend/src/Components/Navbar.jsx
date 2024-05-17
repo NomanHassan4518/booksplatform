@@ -11,7 +11,7 @@ import { removeToCart, increseToQuantity, decreaseToQuantity } from './Redux/Act
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [categoryDrawer, setCategoryDrawer] = useState(false)
-    const [openSignup, setopenSignUp] = useState(false)
+    const [openSignup, setopenSignUp] = useState(false) 
     const [openLogin, setOpenLogin] = useState(false)
     const [bubble, setBubble] = useState('hidden')
     let dispatch = useDispatch();
@@ -73,7 +73,7 @@ const Navbar = () => {
     }
     return (
         <>
-            <div className='md:sticky top-0 w-full  xl:px-16 shadow  px-4 border-b-2 border-red-500 bg-white z-[100] '>
+            <div className='md:sticky top-0 w-full  xl:px-16 shadow  px-4 bg-white z-[100] '>
                 <div className='flex justify-between items-center'>
                     <div className="flex justify-between items-center  xl:space-x-20 lg:space-x-14">
                         <Link to="/" className='text-center  flex items-center space-x-2 py-4'>
@@ -118,7 +118,7 @@ const Navbar = () => {
                                             </div>
                                             <div className='w-[40%]  h-[23rem] bg-gray-100  px-4 py-3'>
                                                 <div className="mt-4">
-                                                    <Link to="/otherBooks" className='text-xl font-semibold mb-2 hover:text-green-600 '>Collections</Link>
+                                                    <Link to="/collection" className='text-xl font-semibold mb-2 hover:text-green-600 '>Collections</Link>
                                                     <div className='mt-4'>
                                                         <Link to="/political" className='text-xl  mb-2 hover:text-blue-600 block'>Political</Link>
                                                         <Link to="/history" className='text-xl  mb-2 hover:text-blue-600 block'>History</Link>
@@ -310,7 +310,7 @@ const Navbar = () => {
                     </div>
                     <div className=' h-[29rem] md:h-[23rem] bg-gray-100  p-6 '>
                         <div className="mt-4">
-                            <Link to="/otherBooks" className='text-xl font-semibold mb-2 hover:text-green-600 ' onClick={()=>{setCategoryDrawer(false)}}>Collections</Link>
+                            <Link to="/collection" className='text-xl font-semibold mb-2 hover:text-green-600 ' onClick={()=>{setCategoryDrawer(false)}}>Collections</Link>
                             <div className='mt-4'>
                                 <Link to="/political" className='text-xl  mb-2 hover:text-blue-600 block' onClick={()=>{setCategoryDrawer(false)}}>Political</Link>
                                 <Link to="/history" className='text-xl  mb-2 hover:text-blue-600 block' onClick={()=>{setCategoryDrawer(false)}}>History</Link>

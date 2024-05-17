@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const OtherBooks = () => {
+const Collection = () => {
     let books=localStorage.getItem('books')
     let Books=JSON.parse(books)
     let otherBooks=Books?.filter((book)=>book.category==='Other Books')
@@ -41,4 +41,4 @@ const OtherBooks = () => {
   )
 }
 
-export default OtherBooks
+export default Collection
