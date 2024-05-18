@@ -25,10 +25,10 @@ const Login = ({ onClose, openModel }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if ( !email || !password) {
-        setError(false);
-        return false;
-      } else if (isValid && !error) {
+    if (!email || !password) {
+      setError(false);
+      return false;
+    } else if (isValid && !error) {
       try {
         setLoading(true);
         let result = await fetch(
@@ -89,7 +89,7 @@ const Login = ({ onClose, openModel }) => {
               Please fill in this form to login.
             </p>
             <form className="flex items-center flex-col space-y-7 py-5">
-            <div className="md:w-[70%] w-[90%]">
+              <div className="md:w-[70%] w-[90%]">
                 <input
                   type="email"
                   value={email}
@@ -97,9 +97,9 @@ const Login = ({ onClose, openModel }) => {
                     const enteredEmail = e.target.value;
                     setEmail(enteredEmail);
                     // Perform validation
-                    if(!isValid){
-                        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    setIsValid(regex.test(enteredEmail));
+                    if (!isValid) {
+                      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                      setIsValid(regex.test(enteredEmail));
                     }
                   }}
                   onBlur={validateEmail}
@@ -127,7 +127,7 @@ const Login = ({ onClose, openModel }) => {
                   <p className="text-red-500">Enter Valid Password</p>
                 )}
               </div>
-              
+
               <button
                 className="bg-blue-600 text-white font-semibold py-2 px-4 rounded w-40 hover:bg-purple-700"
                 onClick={handleLogin}

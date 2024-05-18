@@ -10,7 +10,6 @@ const Checkout = ({ responseAPI }) => {
   let productData = useSelector((state) => state.cardData);
   let totalPrice = useSelector((state) => state.totalPrice);
   const [error, setError] = useState(true);
-  const [check, setCheck] = useState("cash");
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -46,58 +45,39 @@ const Checkout = ({ responseAPI }) => {
       top: 0,
       behavior: "smooth", // Smooth scrolling animation
     });
+
     if (!field.firstName || !field.email || !field.phone || !field.address) {
       setError(false);
       return false;
-    } else if (error === false) {
-      try {
-        setLoading(true);
-        const response = await axios.put(
-          `https://booksplatform-theta.vercel.app/updateStock`,
-          { orderItems }
-        );
-        responseAPI(response.data);
-        dispatch(emptyCart());
-
-        if (response.data.message === "Stocks updated successfully") {
-          navigate("/");
-        }
-      } catch (error) {
-        console.error("Error placing order:", error);
-      } finally {
-        setLoading(false);
-      }
-
+    } else {
       try {
         setLoading(true);
         let order = axios.post(
           "https://booksplatform-theta.vercel.app/userOrder",
           userOrder
         );
-        console.log(order);
+        let response = await order;
+
+        console.log(response);
+
+        if (response.data) {
+          setLoading(true);
+          const response = await axios.put(
+            `https://booksplatform-theta.vercel.app/updateStock`,
+            { orderItems }
+          );
+          if (response.data.message === "Stocks updated successfully") {
+            responseAPI(response.data);
+            navigate("/");
+            dispatch(emptyCart());
+          }
+        }
+      } catch (error) {
+        console.error("Error placing order:", error);
       } finally {
         setLoading(false);
       }
     }
-  };
-
-  // let paymentMethod = [
-  //   {
-  //     type: "Stripe",
-  //     url: "https://apna.ignitehq.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fsrc%2Fcomponents%2Fassets%2FcardImg.7a524e7eee46cdc62481e3df275c3db7.jpg&w=828&q=75"
-  //   },
-  //   {
-  //     type: "Tap",
-  //     url: "https://apna.ignitehq.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fsrc%2Fcomponents%2Fassets%2FcardImg.7a524e7eee46cdc62481e3df275c3db7.jpg&w=828&q=75"
-  //   }
-  // ]
-
-  // const payment = (item) => {
-  //   setCheck(item)
-  // }
-
-  const cash = () => {
-    setCheck("cash");
   };
 
   let shippingFee = 250;
@@ -271,16 +251,13 @@ const Checkout = ({ responseAPI }) => {
           </div>
 
           <div className="mt-6 ">
-            <div
-              className="flex items-center border-2 hover:bg-gray-200  border-gray-200 rounded-md py-3"
-              onClick={cash}
-            >
+            <div className="flex items-center border-2 hover:bg-gray-200  border-gray-200 rounded-md py-3">
               <input
                 type="radio"
                 className="mx-4"
                 name="payment"
                 value="cash"
-                checked={check === "cash"}
+                checked={true}
               />
               <p>Cash on Pickup</p>
             </div>

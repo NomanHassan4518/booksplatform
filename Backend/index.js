@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
     user: "malikhassanhu55@gmail.com",
-    pass: "fgzv tqqz twpm rlwq",
+    pass: "bdxx kpiv cvfu vflh",
   },
 });
 
@@ -87,7 +87,7 @@ app.post("/userOrder", async (req, res) => {
   const mailOptions = {
     from: "malikhassanhu55@gmail.com",
     to: result.userEmail,
-    subject: `Order Confirmation [${result._id}]`,
+    subject: `Order Confirmation`,
     text: `
 Dear ${result.userName},
 
@@ -110,7 +110,6 @@ Once again, thank you for your purchase. We truly appreciate your business.
 Best regards,
 Noman Hassan
 The Books Platform
-malikhassanhu55@gmail.com
 
     `,
   };
@@ -126,8 +125,6 @@ malikhassanhu55@gmail.com
   });
   res.status(200, { order: result });
 });
-
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

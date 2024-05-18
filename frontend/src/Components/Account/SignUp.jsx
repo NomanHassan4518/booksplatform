@@ -24,7 +24,6 @@ const SignUp = ({ onClose, openModel }) => {
     setIsValid(regex.test(email));
   };
 
-
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
@@ -115,9 +114,9 @@ const SignUp = ({ onClose, openModel }) => {
                     const enteredEmail = e.target.value;
                     setEmail(enteredEmail);
                     // Perform validation
-                    if(!isValid){
-                        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    setIsValid(regex.test(enteredEmail));
+                    if (!isValid) {
+                      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                      setIsValid(regex.test(enteredEmail));
                     }
                   }}
                   onBlur={validateEmail}
