@@ -25,16 +25,16 @@ const Education = () => {
               className="shadow-lg border border-gray-700 lg:hover:scale-105 duration-500 ease-in-out bg-gray-200  rounded-lg cursor-pointer"
               onClick={() => handleBook(book)}
             >
-              <div className="w-full 2xl:h-[430px] h-[250px] border-b border-black bg-white  rounded-t-lg ">
+              <div className="w-full 2xl:h-[430px] h-[260px] border-b border-black bg-white  rounded-t-lg ">
                 <img
                   src={book.img}
-                  className="w-full h-full rounded-t-lg object-contain "
+                  className="w-full h-full rounded-t-lg "
                   alt=""
                 />
               </div>
               <div className="my-3 2xl:mt-6 px-2">
-                <h1 className="2xl:text-3xl text-xl font-semibold  overflow-hidden  ">
-                  {book.name}
+                <h1 className="2xl:text-3xl text-lg font-semibold">
+                {book.name.slice(0,25)}
                 </h1>
                 <p className="mt-2 2xl:mt-4 2xl:text-xl 2xl:h-[55px] h-[45px] overflow-hidden text-gray-600 ">
                   {book.desc}

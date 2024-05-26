@@ -29,7 +29,7 @@ const BookDetail = () => {
       <div className="lg:w-[70%] border h-[75%]">
         <img
           src={bookData.img}
-          className="w-full lg:h-[500px] object-contain  rounded"
+          className="w-full lg:h-[500px]  rounded"
           alt=""
         />
       </div>

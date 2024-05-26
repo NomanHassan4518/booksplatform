@@ -126,6 +126,37 @@ The Books Platform
   res.status(200, { order: result });
 });
 
+app.post('/sendOTP', async (req,res)=>{
+  const mailOptions = {
+    from: "malikhassanhu55@gmail.com",
+    to: req.body.result.email,
+    subject: `Your One-Time Password (OTP) for Account Verification`,
+    text: `Dear ${req.body.result.name},
+
+Thank you for choosing The Books Platform! As part of our commitment to ensuring the security of your account, we have generated a One-Time Password (OTP) for verification purposes.
+
+Your OTP is: ${req.body.randomNumber}
+
+Please use this OTP to complete the verification process. If you did not initiate this request, please contact our support team immediately.
+
+Thank you for your cooperation.
+
+Best regards,
+The Books Platform`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ error: "Error sending email" });
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send({ message: "Email sent successfully" });
+    }
+  });
+  res.status(200).json({ message: 'OTP sent Successfully!' });
+})
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

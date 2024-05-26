@@ -50,12 +50,12 @@ const AddProducts = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="w-full flex items-center justify-center py-20">
-          <div className="border w-[60%] p-14 space-y-4">
+        <div className="w-full flex items-center justify-center pb-20">
+          <div className="border w-[60%] px-14 pt-5 space-y-4">
             <input
               type="text"
               className="border rounded p-3 focus:outline-none block w-full "
-              placeholder="Enter Image Name"
+              placeholder="Enter Book Name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -73,7 +73,7 @@ const AddProducts = () => {
             <input
               type="text"
               className="border rounded p-3 focus:outline-none block w-full "
-              placeholder="Enter Image Price"
+              placeholder="Enter Book Price"
               value={price}
               onChange={(e) => {
                 setPrice(e.target.value);
@@ -82,7 +82,7 @@ const AddProducts = () => {
             <input
               type="text"
               className="border rounded p-3 focus:outline-none block w-full "
-              placeholder="Enter Image Category"
+              placeholder="Enter Book Category"
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
@@ -91,7 +91,7 @@ const AddProducts = () => {
             <input
               type="text"
               className="border rounded p-3 focus:outline-none block w-full "
-              placeholder="Enter Image SubCategory"
+              placeholder="Enter Book SubCategory"
               value={subcategory}
               onChange={(e) => {
                 setSuCategory(e.target.value);
@@ -100,7 +100,7 @@ const AddProducts = () => {
             <input
               type="text"
               className="border rounded p-3 focus:outline-none block w-full "
-              placeholder="Enter Image Description"
+              placeholder="Enter Book Description"
               value={desc}
               onChange={(e) => {
                 setDesc(e.target.value);
@@ -109,7 +109,7 @@ const AddProducts = () => {
             <input
               type="number"
               className="border rounded p-3 focus:outline-none block w-full "
-              placeholder="Enter Image Stock"
+              placeholder="Enter Book Stock"
               value={stock}
               onChange={(e) => {
                 setStock(e.target.value);

@@ -1,15 +1,15 @@
-import "./App.css";
-import AllBooks from "./Components/AllBooks";
-import Footer from "./Components/Footer/Footer";
-import Home from "./Components/Home";
-import Navbar from "./Components/Navbar";
-import Spinner from "./Components/Spinner";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import AllBooks from "./Components/AllBooks";
+import Home from "./Components/Home";
+import Footer from "./Components/Footer/Footer";
+import Spinner from "./Components/Spinner";
 import ScrollToTop from "./Components/ScrollToTop";
 import Checkout from "./Components/Checkout/Checkout";
 import AddProducts from "./Components/AddProducts";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 import BookDetail from "./Components/BookDetail";
 import Quran from "./Components/Quran/Quran";
 import QuranBook from "./Components/Quran/QuranBook";
@@ -45,11 +45,11 @@ const App = () => {
   const message = (message) => {
     setResponse(message);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
         const response = await axios.get(
           "https://booksplatform-theta.vercel.app/allBooks"
         );

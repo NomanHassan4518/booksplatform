@@ -269,7 +269,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                {/* <li className='relative'><Link to="/addProduct" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Add Product</Link></li> */}
+                <li className='relative'><Link to="/addProduct" className='text-gray-600 hover:text-black  after:w-0 after:h-[4px] after:bg-black after:top-[2.2rem] after:absolute after:content-[""] ease-in-out after:duration-500 after:left-0 hover:after:w-full'>Add Product</Link></li>
               </ul>
             </div>
           </div>
