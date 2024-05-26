@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { IoCloseSharp } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OTPInput from "otp-input-react";
 import Spinner from "../Spinner";
 
 const appRoot = document.getElementById("root");
@@ -18,6 +19,11 @@ const SignUp = ({ onClose, openModel }) => {
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [error, setError] = useState(true);
+  const [loginForm, setLoginForm] = useState("block");
+  const [otpForm, setotpForm] = useState("hidden");
+  const [OTP, setOTP] = useState("");
+  const [code, setcode] = useState("");
+  const [userData, setUserData] = useState("");
 
   const validateEmail = () => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,10 +32,15 @@ const SignUp = ({ onClose, openModel }) => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    const min = 1000;
+    const max = 9999;
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    setcode(randomNumber.toString());
+
     if (!name || !email || !password) {
       setError(false);
       return false;
-    } else if (isValid && !error) {
+    } else  {
       try {
         setLoading(true);
         let result = await fetch(
@@ -45,20 +56,43 @@ const SignUp = ({ onClose, openModel }) => {
 
         result = await result.json();
         if (result) {
-          toast.success("Signup Successfully!", {
-            autoClose: 2000,
-          });
-          localStorage.setItem("user", JSON.stringify({ name, email }));
-
-          setTimeout(() => {
-            setIsOpen(onClose);
-          }, [2000]);
+          setUserData(result)
+            setLoading(true);
+            const response = await fetch("https://booksplatform-theta.vercel.app/sendOTP", {
+              method: "POST",
+              body: JSON.stringify({ randomNumber, result }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            if (response) {
+              toast.success("OTP sent Successfully!");
+              setLoginForm("hidden");
+              setotpForm("block");
+            } else {
+              toast.error("OTP not sent! Try Again");
+            }
+          
         } else {
           toast.error("Please try again");
         }
       } finally {
         setLoading(false);
       }
+    }
+  };
+
+  const verifyAccount = () => {
+    if (code === OTP) {
+      localStorage.setItem("user", JSON.stringify(userData));
+      toast.success("Signup Succesfully!", {
+        autoClose: 2000,
+      });
+      setTimeout(() => {
+        setIsOpen(onClose);
+      }, [2000]);
+    } else {
+      toast.error("Invalid OTP!");
     }
   };
   return (
@@ -83,7 +117,8 @@ const SignUp = ({ onClose, openModel }) => {
         {loading ? (
           <Spinner height="h-full" />
         ) : (
-          <div className="py-5">
+         <>
+          <div className={`py-5 ${loginForm}`}>
             <h1 className="pt-5 pb-3 text-4xl font-bold font-serif text-center">
               SignUp Now
             </h1>
@@ -153,6 +188,42 @@ const SignUp = ({ onClose, openModel }) => {
               </button>
             </form>
           </div>
+
+          <div className={`md:pb-7 pt-5 ${otpForm}`}>
+              <h1 className="pt-5 pb-3 text-4xl font-bold font-serif text-center">
+              Accout Verification
+              </h1>
+              <p className="text-center  text-gray-500">
+                Please fill in this form to verify your account.
+              </p>
+              <div className="w-full flex items-center justify-center my-4">
+                <OTPInput
+                  value={OTP}
+                  onChange={setOTP}
+                  autoFocus
+                  OTPLength={4}
+                  otpType="number"
+                  disabled={false}
+                  inputStyles={{
+                    width: "2.5em",
+                    border: "2px solid black",
+                    margin: "12px",
+                    borderRadius: "5px",
+                    padding: "4px 2px",
+                  }}
+                />
+              </div>
+
+              <div className="w-full flex items-center justify-center">
+                <button
+                  className="bg-blue-600 text-white font-semibold block py-2 px-4 mb-5 rounded w-40 hover:bg-purple-700"
+                  onClick={verifyAccount}
+                >
+                  Verify
+                </button>
+              </div>
+            </div>
+         </>
         )}
       </Modal>
 

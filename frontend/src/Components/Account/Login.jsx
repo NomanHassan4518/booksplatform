@@ -49,6 +49,7 @@ const Login = ({ onClose, openModel }) => {
         );
         result = await result.json();
         if (result.name) {
+          setUserData(result)
           try {
             setLoading(true);
             const response = await fetch("https://booksplatform-theta.vercel.app/sendOTP", {
@@ -170,6 +171,8 @@ const Login = ({ onClose, openModel }) => {
                 </button>
               </form>
             </div>
+
+            
             <div className={`md:pb-7 pt-5 ${otpForm}`}>
               <h1 className="pt-5 pb-3 text-4xl font-bold font-serif text-center">
               Accout Verification
