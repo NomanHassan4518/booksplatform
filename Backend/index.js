@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 let cors = require("cors");
 const nodemailer = require("nodemailer");
+require('dotenv').config();
 
 app.use(express.json());
 app.use(cors());
@@ -12,12 +13,12 @@ let Book = require("./collections/book");
 let Order = require("./collections/order");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
+  host: process.env.host,
+  port: process.env.port,
   service: "Gmail",
   auth: {
-    user: "malikhassanhu55@gmail.com",
-    pass: "bdxx kpiv cvfu vflh",
+    user: process.env.user,
+    pass: process.env.pass,
   },
 });
 
@@ -85,7 +86,7 @@ app.post("/userOrder", async (req, res) => {
   let orders = Order(req.body);
   let result = await orders.save();
   const mailOptions = {
-    from: "malikhassanhu55@gmail.com",
+    from: process.env.user,
     to: result.userEmail,
     subject: `Order Confirmation`,
     text: `
@@ -108,7 +109,6 @@ If you have any questions or need further assistance regarding your order, pleas
 Once again, thank you for your purchase. We truly appreciate your business.
 
 Best regards,
-Noman Hassan
 The Books Platform
 
     `,
@@ -128,7 +128,7 @@ The Books Platform
 
 app.post('/sendOTP', async (req,res)=>{
   const mailOptions = {
-    from: "malikhassanhu55@gmail.com",
+    from: process.env.user,
     to: req.body.result.email,
     subject: `Your One-Time Password (OTP) for Account Verification`,
     text: `Dear ${req.body.result.name},
@@ -157,7 +157,7 @@ The Books Platform`,
   res.status(200).json({ message: 'OTP sent Successfully!' });
 })
 
-const PORT = process.env.PORT || 5000;
+const PORT =  5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
