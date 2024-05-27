@@ -13,12 +13,12 @@ let Book = require("./collections/book");
 let Order = require("./collections/order");
 
 const transporter = nodemailer.createTransport({
-  host: process.env.host,
-  port: process.env.port,
+  host: "smtp.gmail.com",
+  port: 587,
   service: "Gmail",
   auth: {
-    user: process.env.user,
-    pass: process.env.pass,
+    user: "malikhassanhu55@gmail.com",
+    pass: "bdxx kpiv cvfu vflh",
   },
 });
 
@@ -85,8 +85,9 @@ app.put("/updateStock", async (req, res) => {
 app.post("/userOrder", async (req, res) => {
   let orders = Order(req.body);
   let result = await orders.save();
+  console.log(result);
   const mailOptions = {
-    from: process.env.user,
+    from: "malikhassanhu55@gmail.com",
     to: result.userEmail,
     subject: `Order Confirmation`,
     text: `
@@ -127,8 +128,9 @@ The Books Platform
 });
 
 app.post('/sendOTP', async (req,res)=>{
+  console.log(req.body);
   const mailOptions = {
-    from: process.env.user,
+    from: "malikhassanhu55@gmail.com",
     to: req.body.result.email,
     subject: `Your One-Time Password (OTP) for Account Verification`,
     text: `Dear ${req.body.result.name},
@@ -156,7 +158,6 @@ The Books Platform`,
   });
 })
 
-const PORT =  5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(5000, () => {
+  console.log(`Server is running on port 5000`);
 });
