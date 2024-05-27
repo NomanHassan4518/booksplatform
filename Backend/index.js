@@ -154,7 +154,6 @@ The Books Platform`,
       res.send({ message: "Email sent successfully" });
     }
   });
-  res.status(200).json({ message: 'OTP sent Successfully!' });
 })
 
 const PORT =  5000;
