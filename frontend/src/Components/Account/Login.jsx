@@ -52,7 +52,7 @@ const Login = ({ onClose, openModel }) => {
           setUserData(result)
           try {
             setLoading(true);
-            const response = await fetch("http://localhost:5000/sendOTP", {
+            const response = await fetch("https://booksplatform-theta.vercel.app/sendOTP", {
               method: "POST",
               body: JSON.stringify({ randomNumber, result }),
               headers: {
