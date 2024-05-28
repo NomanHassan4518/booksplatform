@@ -9,7 +9,6 @@ import Footer from "./Components/Footer/Footer";
 import Spinner from "./Components/Spinner";
 import ScrollToTop from "./Components/ScrollToTop";
 import Checkout from "./Components/Checkout/Checkout";
-import AddProducts from "./Components/AddProducts";
 import BookDetail from "./Components/BookDetail";
 import Quran from "./Components/Quran/Quran";
 import QuranBook from "./Components/Quran/QuranBook";
@@ -36,6 +35,7 @@ import AboutUs from "./Components/Footer/AboutUs";
 import Privacy from "./Components/Footer/Privacy";
 import Terms from "./Components/Footer/Terms";
 import Return from "./Components/Footer/Return";
+import Order from "./Components/Order";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -86,7 +86,7 @@ const App = () => {
               path="/checkout"
               element={<Checkout responseAPI={message} />}
             ></Route>
-            <Route path="/addProduct" element={<AddProducts />}></Route>
+            <Route path="/orders" element={<Order />}></Route>
             <Route path="/quran" element={<Quran />}></Route>
             <Route path="/quranBook" element={<QuranBook />}></Route>
             <Route path="/aboutQuran" element={<AboutQuran />}></Route>
