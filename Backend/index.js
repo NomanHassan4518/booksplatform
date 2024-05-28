@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 let cors = require("cors");
 const nodemailer = require("nodemailer");
-const cron = require('node-cron');
-const axios = require('axios');
+const cron = require("node-cron");
+const axios = require("axios");
 
 app.use(express.json());
 app.use(cors());
@@ -12,54 +12,7 @@ require("./collections/config");
 let User = require("./collections/user");
 let Book = require("./collections/book");
 let Order = require("./collections/order");
-
-// Helper function to get the next status based on the current status
-function getNextStatus(currentStatus) {
-  const statusSequence = ['pending', 'processing', 'shipped', 'delivered'];
-  const currentIndex = statusSequence.indexOf(currentStatus);
-  if (currentIndex === -1 || currentIndex === statusSequence.length - 1) {
-    return 'complete'; // If the current status is not in the sequence or is the last one, set it to 'complete'
-  } else {
-    return statusSequence[currentIndex + 1]; // Otherwise, return the next status in the sequence
-  }
-}
-
-// Update order status every minute (for testing)
-cron.schedule('* * * * *', async () => {
-  try {
-    const orders = await Order.find({ status: { $nin: ['complete', 'cancelled'] } });
-    orders.forEach(async order => {
-      try {
-        let nextStatus = getNextStatus(order.status);
-        // Make an API call to update order status
-        await axios.put(`http://localhost:5000/api/orders/updateStatus/${order._id}`, { status: nextStatus });
-        console.log(`Order ${order._id} status updated to '${nextStatus}'`);
-      } catch (error) {
-        console.error(`Error updating status for order ${order._id}:`, error);
-      }
-    });
-  } catch (err) {
-    console.error('Error updating orders:', err);
-  }
-});
-
-// Route to update order status
-app.put('/api/orders/updateStatus/:id', async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-
-  try {
-    const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
-    if (!order) {
-      return res.status(404).json({ error: 'Order not found' });
-    }
-    res.json(order);
-  } catch (error) {
-    console.error('Error updating order status:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
+let OrderHistory = require("./collections/history");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -150,7 +103,10 @@ Below, you'll find the detailed list of the items you've ordered:
 
 Books Ordered:
 ${result.orderedBooks
-  .map((book, index) => `${index + 1}. [ ${book.Product.name} (PKR.${book.Product.price}) ]`)
+  .map(
+    (book, index) =>
+      `${index + 1}. [ ${book.Product.name} (PKR.${book.Product.price}) ]`
+  )
   .join("\n")}
 
 
@@ -176,7 +132,7 @@ The Books Platform
   res.status(200, { order: result });
 });
 
-app.post('/sendOTP', async (req,res)=>{
+app.post("/sendOTP", async (req, res) => {
   console.log(req.body);
   const mailOptions = {
     from: "malikhassanhu55@gmail.com",
@@ -205,16 +161,115 @@ The Books Platform`,
       res.send({ message: "Email sent successfully" });
     }
   });
-})
+});
 
 app.get("/orderstatus", async (req, resp) => {
   let order = await Order.find(req.body);
-  resp.status(200).json({data:order});
+  resp.status(200).json({ data: order });
 });
 
 app.delete("/orderDelete/:id", async (req, resp) => {
-  let result = await Order.deleteOne({ _id:  req.params.id });
-  resp.status(200).json({data:result});
+  let result = await Order.deleteOne({ _id: req.params.id });
+  resp.status(200).json({ data: result });
+});
+
+// Helper function to get the next status based on the current status
+function getNextStatus(currentStatus) {
+  const statusSequence = ["Pending", "Processing", "Shipped", "Delivered"];
+  const currentIndex = statusSequence.indexOf(currentStatus);
+  if (currentIndex === -1 || currentIndex === statusSequence.length - 1) {
+    return "complete"; // If the current status is not in the sequence or is the last one, set it to 'complete'
+  } else {
+    return statusSequence[currentIndex + 1]; // Otherwise, return the next status in the sequence
+  }
+}
+
+// Test cases
+const testCases = [
+  { input: "Pending", expected: "Processing" },
+  { input: "Processing", expected: "Shipped" },
+  { input: "Shipped", expected: "Delivered" },
+  { input: "Delivered", expected: "complete" },
+  { input: "NonExistentStatus", expected: "complete" }
+];
+
+testCases.forEach(({ input, expected }, index) => {
+  const result = getNextStatus(input);
+  console.log(`Test case ${index + 1}: input = ${input}, expected = ${expected}, result = ${result}`);
+  console.assert(result === expected, `Test case ${index + 1} failed`);
+});
+
+console.log("All test cases passed");
+
+
+// Update order status every minute (for testing)
+cron.schedule("* * * * *", async () => {
+  try {
+    const orders = await Order.find({
+      status: { $nin: ["complete", "cancelled"] },
+    });
+    orders.forEach(async (order) => {
+      try {
+        let nextStatus = getNextStatus(order.status);
+        if (nextStatus === "complete") {
+          // Move order to OrderHistory and remove from Orders
+          const orderHistory = new OrderHistory({
+            userID: order.userID,
+            userName: order.userName,
+            userEmail: order.userEmail,
+            userPhone: order.userPhone,
+            userAddress: order.userAddress,
+            userNote: order.userNote,
+            orderedBooks: order.orderedBooks,
+            completedAt: new Date(),
+          });
+          await orderHistory.save();
+          await Order.deleteOne({ _id: order._id });
+          console.log(
+            `Order ${order._id} moved to OrderHistory and removed from Orders`
+          );
+        } else {
+          // Make an API call to update order status
+          await axios.put(
+            `http://localhost:5000/api/orders/updateStatus/${order._id}`,
+            { status: nextStatus }
+          );
+          console.log(`Order ${order._id} status updated to '${nextStatus}'`);
+        }
+      } catch (error) {
+        console.error(`Error updating status for order ${order._id}:`, error);
+      }
+    });
+  } catch (err) {
+    console.error("Error updating orders:", err);
+  }
+});
+
+// Route to update order status
+app.put("/api/orders/updateStatus/:id", async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+    res.json(order);
+  } catch (error) {
+    console.error("Error updating order status:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/orderHistory", async (req, res) => {
+  try {
+    const history = await OrderHistory.find(req.body).lean().exec();
+    res.json(history);
+  } catch (error) {
+    console.error("Error fetching order history:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.listen(5000, () => {
