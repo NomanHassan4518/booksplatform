@@ -101,7 +101,7 @@ Below, you'll find the detailed list of the items you've ordered:
 
 Books Ordered:
 ${result.orderedBooks
-  .map((book, index) => `${index + 1}. [ ${book.Product.name} ]`)
+  .map((book, index) => `${index + 1}. [ ${book.Product.name} (PKR.${book.Product.price}) ]`)
   .join("\n")}
 
 
