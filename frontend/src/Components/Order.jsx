@@ -13,7 +13,7 @@ const Order = () => {
   const fetchData = async () => {
     try{
         setLoading(true)
-        const orders = await axios.get("http://localhost:5000/orderstatus");
+        const orders = await axios.get("https://booksplatform-theta.vercel.app/orderstatus");
     setOrderStatus(orders.data.data);
     } finally{
         setLoading(false)
@@ -23,7 +23,7 @@ const Order = () => {
   const fetchHistoryData = async () => {
     try{
         setLoading(true)
-        const orders = await axios.get("http://localhost:5000/orderHistory");
+        const orders = await axios.get("https://booksplatform-theta.vercel.app/orderHistory");
     setHistory(orders.data)
     } finally{
         setLoading(false)
@@ -56,7 +56,7 @@ const Order = () => {
 
   const orderDetele = async (obj) => {
     let response = await axios.delete(
-      `http://localhost:5000/orderDelete/${obj.id}`
+      `https://booksplatform-theta.vercel.app/orderDelete/${obj.id}`
     );
     if (response.data) {
       fetchData();

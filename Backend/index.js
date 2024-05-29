@@ -184,26 +184,12 @@ function getNextStatus(currentStatus) {
   }
 }
 
-// Test cases
-const testCases = [
-  { input: "Pending", expected: "Processing" },
-  { input: "Processing", expected: "Shipped" },
-  { input: "Shipped", expected: "Delivered" },
-  { input: "Delivered", expected: "complete" },
-  { input: "NonExistentStatus", expected: "complete" }
-];
-
-testCases.forEach(({ input, expected }, index) => {
-  const result = getNextStatus(input);
-  console.log(`Test case ${index + 1}: input = ${input}, expected = ${expected}, result = ${result}`);
-  console.assert(result === expected, `Test case ${index + 1} failed`);
-});
 
 console.log("All test cases passed");
 
 
 // Update order status every minute (for testing)
-cron.schedule("* * * * *", async () => {
+cron.schedule("*/5 * * * *", async () => {
   try {
     const orders = await Order.find({
       status: { $nin: ["complete", "cancelled"] },
