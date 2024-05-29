@@ -8,6 +8,7 @@ const axios = require("axios");
 app.use(express.json());
 app.use(cors());
 
+
 require("./collections/config");
 let User = require("./collections/user");
 let Book = require("./collections/book");
@@ -89,7 +90,7 @@ app.post("/userOrder", async (req, res) => {
   let result = await orders.save();
   console.log(result);
   const mailOptions = {
-    from: "malikhassanhu55@gmail.com",
+    from: "shoaibahmadbaig015@gmail.com",
     to: result.userEmail,
     subject: `Order Confirmation`,
     text: `
@@ -133,7 +134,6 @@ The Books Platform
 });
 
 app.post("/sendOTP", async (req, res) => {
-  console.log(req.body);
   const mailOptions = {
     from: "malikhassanhu55@gmail.com",
     to: req.body.result.email,
@@ -185,11 +185,8 @@ function getNextStatus(currentStatus) {
 }
 
 
-console.log("All test cases passed");
-
-
 // Update order status every minute (for testing)
-cron.schedule("*/5 * * * *", async () => {
+cron.schedule("*/2 * * * *", async () => {
   try {
     const orders = await Order.find({
       status: { $nin: ["complete", "cancelled"] },

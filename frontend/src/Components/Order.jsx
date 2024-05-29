@@ -32,16 +32,12 @@ const Order = () => {
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 60000); // Fetch orders every minute
-    return () => clearInterval(interval); // Clear interval on component unmount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
   useEffect(() => {
     fetchHistoryData();
-    const interval = setInterval(fetchHistoryData, 60000); // Fetch orders every minute
-    return () => clearInterval(interval); // Clear interval on component unmount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
